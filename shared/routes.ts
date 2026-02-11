@@ -4,7 +4,8 @@ import {
   projects, 
   skills, 
   experiences, 
-  educations 
+  educations,
+  testimonies
 } from './schema';
 
 export const errorSchemas = {
@@ -51,6 +52,15 @@ export const api = {
       path: '/api/educations' as const,
       responses: {
         200: z.array(z.custom<typeof educations.$inferSelect>()),
+      },
+    },
+  },
+  testimonies: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/testimonies' as const,
+      responses: {
+        200: z.array(z.custom<typeof testimonies.$inferSelect>()),
       },
     },
   },

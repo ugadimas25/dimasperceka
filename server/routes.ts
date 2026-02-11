@@ -33,6 +33,12 @@ export async function registerRoutes(
     res.json(educations);
   });
 
+  // Testimonies
+  app.get(api.testimonies.list.path, async (_req, res) => {
+    const testimonies = await storage.getTestimonies();
+    res.json(testimonies);
+  });
+
   // Contact
   app.post(api.contact.submit.path, async (req, res) => {
     try {
@@ -66,7 +72,7 @@ async function seedDatabase() {
       role: "Remote Sensing and Climate Lead",
       duration: "Jan 2022 - Present",
       location: "Jakarta, Indonesia",
-      description: "Leading remote sensing projects for environmental and FTTH monitoring. Integrating LiDAR, satellite imagery, and land-use datasets for supply chain transparency. Managing GIS developers and environmental scientists.",
+      description: "Leading remote sensing and climate projects to support climate change analysis and environmental monitoring. Collaborating with cross-functional teams to design and implement innovative climate solutions, integrating remote sensing data with climate models to assess and predict environmental impacts.",
       order: 1
     });
     await storage.createExperience({
@@ -74,7 +80,7 @@ async function seedDatabase() {
       role: "GIS Developer",
       duration: "Mar 2019 - Jan 2021",
       location: "Jakarta, Indonesia",
-      description: "Translated business needs to technical requirements. Developed and deployed automated prioritization scripts. Coordinated with sustainable commodities researchers.",
+      description: "Translated business needs into technical requirements and specifications. Developed and deployed automated prioritization scripts and participated in the design, development, and implementation of complex geospatial applications.",
       order: 2
     });
     await storage.createExperience({
@@ -85,37 +91,13 @@ async function seedDatabase() {
       description: "Managed geospatial databases, developed maps, and performed aerial photogrammetry for technical feasibility studies.",
       order: 3
     });
-    await storage.createExperience({
-      company: "Center of Agroecology and Land Resources",
-      role: "GIS Developer",
-      duration: "Mar 2017 - Jan 2019",
-      location: "Yogyakarta",
-      description: "Worked on connectivity of protected areas and peat ecosystem cultivation. Designed and created geospatial databases.",
-      order: 4
-    });
-    await storage.createExperience({
-      company: "Waindo Specterra",
-      role: "GIS Specialist",
-      duration: "July 2016 - Feb 2017",
-      location: "",
-      description: "Surveyed soil characteristics for Land System in East and South Kalimantan. Performed data capture and analysis.",
-      order: 5
-    });
-    await storage.createExperience({
-      company: "Agricola Nusantara Baramineral",
-      role: "GIS Specialist",
-      duration: "Jan 2016 - July 2016",
-      location: "",
-      description: "Feasibility study on Industrial Scale Vaname Shrimp Farming. Managed geospatial database and developed maps.",
-      order: 6
-    });
 
     // Education
     await storage.createEducation({
       institution: "Universitas Gadjah Mada",
       degree: "Master of Engineering, Geomatics Engineering",
       year: "2018 - 2021",
-      description: "Thesis: Development of Spatial Web Based Agricultural Irrigation Management Information System",
+      description: "Thesis: Development of Spatial Web Based Agricultural Irrigation Management Information System. Focused on creating an innovative spatial-based system to optimize irrigation management.",
       order: 1
     });
     await storage.createEducation({
@@ -128,43 +110,51 @@ async function seedDatabase() {
 
     // Skills
     const skillList = [
+      { name: "Remote Sensing", category: "Core Expertise" },
+      { name: "Data Science", category: "Core Expertise" },
+      { name: "Web Development", category: "Core Expertise" },
       { name: "ArcGIS Pro", category: "GIS Software" },
-      { name: "QGIS", category: "GIS Software" },
-      { name: "ENVI / ENVI LiDAR", category: "Remote Sensing" },
-      { name: "Google Earth Engine", category: "Cloud Processing" },
       { name: "Python", category: "Programming" },
-      { name: "PostgreSQL", category: "Database" },
-      { name: "SQL", category: "Database" },
       { name: "Javascript", category: "Programming" },
-      { name: "PHP", category: "Programming" },
-      { name: "Agisoft Metashape", category: "3D Modelling" },
+      { name: "PostgreSQL", category: "Database" },
+      { name: "Google Earth Engine", category: "Cloud Processing" },
     ];
 
     for (const s of skillList) {
       await storage.createSkill(s);
     }
 
-    // Projects (Derived from Experience/CV context)
+    // Testimonies
+    await storage.createTestimony({
+      name: "Didi Adisaputro, PhD",
+      role: "Sr Head of Geospatial Climate and IoT at Koltiva",
+      content: "Dimas demonstrates a rare combination of technical skill and strategic thinking. His ability to integrate data science and geospatial technology has consistently delivered impactful results."
+    });
+    await storage.createTestimony({
+      name: "Dr. Wahyu Wardhana",
+      role: "Colleague",
+      content: "Working with Dimas has been a privilege. His commitment to excellence and his innovative web solutions have significantly enhanced our projects."
+    });
+    await storage.createTestimony({
+      name: "Prof. Sri Nuryani",
+      role: "Academic Mentor",
+      content: "Dimas's expertise in remote sensing and GIS has been instrumental in advancing environmental monitoring. His innovative approach and dedication to accuracy have set a new standard."
+    });
+
+    // Projects
     await storage.createProject({
       title: "Deforestation-free Supply Chain Monitoring",
-      description: "Developed and managed geospatial projects to track deforestation risk commodities like palm oil and cocoa. Integrated satellite imagery with sustainability models.",
+      description: "Decoding satellite imagery to track deforestation risk commodities and empower sustainable decision-making with precision analytics.",
       role: "Lead",
-      techStack: ["Remote Sensing", "GIS", "Python"],
+      techStack: ["Remote Sensing", "Sustainability", "Python"],
       order: 1
     });
     await storage.createProject({
-      title: "Spatial Web Irrigation Management System",
-      description: "Master's Thesis project: Development of a web-based information system for agricultural irrigation management.",
-      role: "Developer/Researcher",
-      techStack: ["Web GIS", "Database"],
+      title: "Spatial Web Irrigation System",
+      description: "Building dynamic, user-centric web applications for geospatial analysis and data visualization.",
+      role: "Developer",
+      techStack: ["Web GIS", "Node.js", "PostgreSQL"],
       order: 2
-    });
-    await storage.createProject({
-      title: "Peat Ecosystem Connectivity",
-      description: "Project for Connectivity of Protected Areas and Peat Ecosystem Cultivation in Central Kalimantan.",
-      role: "GIS Developer",
-      techStack: ["GIS", "Spatial Analysis"],
-      order: 3
     });
   }
 }

@@ -1,9 +1,10 @@
 import { db } from "./db";
 import {
-  projects, skills, experiences, educations, messages,
+  projects, skills, experiences, educations, messages, testimonies,
   type InsertProject, type InsertSkill, type InsertExperience, 
   type InsertEducation, type InsertMessage, type Project, 
-  type Skill, type Experience, type Education, type Message
+  type Skill, type Experience, type Education, type Message,
+  type Testimony, type InsertTestimony
 } from "@shared/schema";
 import { eq, desc, asc } from "drizzle-orm";
 
@@ -13,12 +14,14 @@ export interface IStorage {
   getSkills(): Promise<Skill[]>;
   getExperiences(): Promise<Experience[]>;
   getEducations(): Promise<Education[]>;
+  getTestimonies(): Promise<Testimony[]>;
   
-  // Write methods (for seeding/admin in future)
+  // Write methods
   createProject(project: InsertProject): Promise<Project>;
   createSkill(skill: InsertSkill): Promise<Skill>;
   createExperience(experience: InsertExperience): Promise<Experience>;
   createEducation(education: InsertEducation): Promise<Education>;
+  createTestimony(testimony: InsertTestimony): Promise<Testimony>;
   
   // Contact
   createMessage(message: InsertMessage): Promise<Message>;
@@ -34,11 +37,15 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getExperiences(): Promise<Experience[]> {
-    return await db.select().from(experiences).orderBy(desc(experiences.id)); // Assuming ID order roughly correlates to recency or use order field
+    return await db.select().from(experiences).orderBy(asc(experiences.order));
   }
 
   async getEducations(): Promise<Education[]> {
-    return await db.select().from(educations).orderBy(desc(educations.year));
+    return await db.select().from(educations).orderBy(asc(educations.order));
+  }
+
+  async getTestimonies(): Promise<Testimony[]> {
+    return await db.select().from(testimonies);
   }
 
   async createProject(insertProject: InsertProject): Promise<Project> {
@@ -59,6 +66,11 @@ export class DatabaseStorage implements IStorage {
   async createEducation(insertEducation: InsertEducation): Promise<Education> {
     const [education] = await db.insert(educations).values(insertEducation).returning();
     return education;
+  }
+
+  async createTestimony(insertTestimony: InsertTestimony): Promise<Testimony> {
+    const [testimony] = await db.insert(testimonies).values(insertTestimony).returning();
+    return testimony;
   }
 
   async createMessage(insertMessage: InsertMessage): Promise<Message> {

@@ -42,6 +42,14 @@ export const educations = pgTable("educations", {
   order: integer("order").default(0),
 });
 
+export const testimonies = pgTable("testimonies", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  role: text("role"),
+  content: text("content").notNull(),
+  avatarUrl: text("avatar_url"),
+});
+
 export const messages = pgTable("messages", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -56,6 +64,7 @@ export const insertProjectSchema = createInsertSchema(projects).omit({ id: true 
 export const insertSkillSchema = createInsertSchema(skills).omit({ id: true });
 export const insertExperienceSchema = createInsertSchema(experiences).omit({ id: true });
 export const insertEducationSchema = createInsertSchema(educations).omit({ id: true });
+export const insertTestimonySchema = createInsertSchema(testimonies).omit({ id: true });
 export const insertMessageSchema = createInsertSchema(messages).omit({ id: true, createdAt: true });
 
 // === TYPES ===
@@ -71,6 +80,9 @@ export type InsertExperience = z.infer<typeof insertExperienceSchema>;
 
 export type Education = typeof educations.$inferSelect;
 export type InsertEducation = z.infer<typeof insertEducationSchema>;
+
+export type Testimony = typeof testimonies.$inferSelect;
+export type InsertTestimony = z.infer<typeof insertTestimonySchema>;
 
 export type Message = typeof messages.$inferSelect;
 export type InsertMessage = z.infer<typeof insertMessageSchema>;
