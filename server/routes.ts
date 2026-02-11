@@ -130,31 +130,39 @@ async function seedDatabase() {
       role: "Sr Head of Geospatial Climate and IoT at Koltiva",
       content: "Dimas demonstrates a rare combination of technical skill and strategic thinking. His ability to integrate data science and geospatial technology has consistently delivered impactful results."
     });
-    await storage.createTestimony({
-      name: "Dr. Wahyu Wardhana",
-      role: "Colleague",
-      content: "Working with Dimas has been a privilege. His commitment to excellence and his innovative web solutions have significantly enhanced our projects."
-    });
-    await storage.createTestimony({
-      name: "Prof. Sri Nuryani",
-      role: "Academic Mentor",
-      content: "Dimas's expertise in remote sensing and GIS has been instrumental in advancing environmental monitoring. His innovative approach and dedication to accuracy have set a new standard."
-    });
 
-    // Projects
+    // Projects (From portfolio-dimas-omega.vercel.app/work.html)
     await storage.createProject({
-      title: "Deforestation-free Supply Chain Monitoring",
-      description: "Decoding satellite imagery to track deforestation risk commodities and empower sustainable decision-making with precision analytics.",
-      role: "Lead",
-      techStack: ["Remote Sensing", "Sustainability", "Python"],
+      title: "Deforestation Analysis",
+      description: "Conducted comprehensive deforestation analysis using satellite imagery to monitor and assess forest cover changes over time.",
+      role: "GIS Specialist",
+      techStack: ["Remote Sensing", "Satellite Imagery", "GIS"],
+      link: "https://portfolio-dimas-omega.vercel.app/port_1_deforestation_analysis/webmap.html",
       order: 1
     });
     await storage.createProject({
-      title: "Spatial Web Irrigation System",
-      description: "Building dynamic, user-centric web applications for geospatial analysis and data visualization.",
-      role: "Developer",
-      techStack: ["Web GIS", "Node.js", "PostgreSQL"],
+      title: "Autocorrection Polygon",
+      description: "Designed and developed an interactive geospatial platform for environmental analysis and decision-making.",
+      role: "GIS Developer",
+      techStack: ["Web GIS", "Interactive Platform", "Javascript"],
+      link: "https://portfolio-dimas-omega.vercel.app/port_2_polygon_verification/polygon-detail.html",
       order: 2
+    });
+    await storage.createProject({
+      title: "Carbon Stock Analysis",
+      description: "Led the integration of remote sensing data with climate models to assess and predict environmental impacts.",
+      role: "Climate Lead",
+      techStack: ["Climate Models", "Remote Sensing", "Data Integration"],
+      link: "https://portfolio-dimas-omega.vercel.app/port_3_Carbon%20Stock%20Analysis/index.html",
+      order: 3
+    });
+    await storage.createProject({
+      title: "Emission Dashboard",
+      description: "Automated workflows for geospatial data processing and analysis using Python and cloud-based solutions.",
+      role: "Data Scientist",
+      techStack: ["Python", "Cloud Solutions", "Dashboard"],
+      link: "https://portfolio-dimas-omega.vercel.app/port_4_ghg_dashboard/index.html",
+      order: 4
     });
   }
 }
