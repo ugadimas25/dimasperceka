@@ -20,6 +20,7 @@ export function Navigation() {
     { name: "Experience", to: "experience" },
     { name: "Skills", to: "skills" },
     { name: "Projects", to: "projects" },
+    { name: "Articles", to: "articles" },
     { name: "Contact", to: "contact" },
   ];
 

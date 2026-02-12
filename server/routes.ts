@@ -80,16 +80,40 @@ async function seedDatabase() {
       role: "GIS Developer",
       duration: "Mar 2019 - Jan 2021",
       location: "Jakarta, Indonesia",
-      description: "Translated business needs into technical requirements and specifications. Developed and deployed automated prioritization scripts and participated in the design, development, and implementation of complex geospatial applications.",
+      description: "Work directly with Product Owners to translate business needs to technical requirements and specifications. Work closely with stakeholders and provide the deliverables with high quality of standards. Develop, test, and deploy automated prioritization script. Participates in the design, development and implementation of complex applications. As needed, coordinated with existing team of sustainable commodities researchers.",
       order: 2
     });
     await storage.createExperience({
       company: "CV Amanah Rimba",
-      role: "GIS Consultant",
+      role: "GIS Consultan",
       duration: "Mar 2019 - Jan 2021",
       location: "Indonesia",
-      description: "Managed geospatial databases, developed maps, and performed aerial photogrammetry for technical feasibility studies.",
+      description: "Project for Technical Feasibility Study. Manage geospatial database and develop maps and aerial photogrammetry. Perform data capture and analysis for GIS product. Support in designing and creating the geospatial database. Oversee data flow, management, and distribution activities to support GIS.",
       order: 3
+    });
+    await storage.createExperience({
+      company: "Center of Agroecology and Land Resources",
+      role: "GIS Developer Lead",
+      duration: "Mar 2017 - Jan 2019",
+      location: "Yogyakarta, Indonesia",
+      description: "Project for Connectivity of Protected Areas and Peat Ecosystem Cultivation in Central Kalimantan. Perform data capture and analysis for GIS product. Support in designing and creating the geospatial database. Project for Inventarisation of Peat Ecosystem Cultivation in Lamandau, Central Kalimantan. Participates in the design, development and implementation of complex applications. As needed, coordinated with existing team of sustainable commodities researchers.",
+      order: 4
+    });
+    await storage.createExperience({
+      company: "Waindo Specterra",
+      role: "GIS Specialist [By Project]",
+      duration: "Jul 2016 - Feb 2017",
+      location: "Kalimantan, Indonesia",
+      description: "Survey of chemical, biological and physical characteristics of soil for Land System in East and South Kalimantan. Perform data capture and analysis for GIS product. Support in designing and creating the geospatial database.",
+      order: 5
+    });
+    await storage.createExperience({
+      company: "Agricola Nusantara Baramineral",
+      role: "GIS Specialist [By Project]",
+      duration: "Jan 2016 - Jul 2016",
+      location: "Riau, Indonesia",
+      description: "Project for Technical Feasibility Study on Industrial Scale Vaname Shrimp Farming in Lingga Islands, Riau. Manage geospatial database and develop maps and aerial photogrammetry. Perform data capture and analysis for GIS product. Support in designing and creating the geospatial database. Oversee data flow, management, and distribution activities to support GIS.",
+      order: 6
     });
 
     // Education
@@ -110,14 +134,18 @@ async function seedDatabase() {
 
     // Skills
     const skillList = [
-      { name: "Remote Sensing", category: "Core Expertise" },
-      { name: "Data Science", category: "Core Expertise" },
-      { name: "Web Development", category: "Core Expertise" },
-      { name: "ArcGIS Pro", category: "GIS Software" },
-      { name: "Python", category: "Programming" },
-      { name: "Javascript", category: "Programming" },
-      { name: "PostgreSQL", category: "Database" },
-      { name: "Google Earth Engine", category: "Cloud Processing" },
+      { name: "ArcGIS Pro", category: "GIS Software", proficiency: 95 },
+      { name: "QGIS", category: "GIS Software", proficiency: 90 },
+      { name: "Google Earth Engine", category: "GIS Software", proficiency: 88 },
+      { name: "MapLibre GL", category: "GIS Software", proficiency: 85 },
+      { name: "Python", category: "Programming", proficiency: 90 },
+      { name: "JavaScript/TypeScript", category: "Programming", proficiency: 85 },
+      { name: "PostgreSQL/PostGIS", category: "Programming", proficiency: 82 },
+      { name: "R", category: "Programming", proficiency: 75 },
+      { name: "Satellite Imagery Analysis", category: "Remote Sensing", proficiency: 92 },
+      { name: "Drone Photogrammetry", category: "Remote Sensing", proficiency: 88 },
+      { name: "LiDAR Processing", category: "Remote Sensing", proficiency: 80 },
+      { name: "Change Detection", category: "Remote Sensing", proficiency: 85 },
     ];
 
     for (const s of skillList) {
@@ -131,38 +159,23 @@ async function seedDatabase() {
       content: "Dimas demonstrates a rare combination of technical skill and strategic thinking. His ability to integrate data science and geospatial technology has consistently delivered impactful results."
     });
 
-    // Projects (From portfolio-dimas-omega.vercel.app/work.html)
+    // Projects - Real work with real descriptions
     await storage.createProject({
-      title: "Deforestation Analysis",
-      description: "Conducted comprehensive deforestation analysis using satellite imagery to monitor and assess forest cover changes over time.",
-      role: "GIS Specialist",
-      techStack: ["Remote Sensing", "Satellite Imagery", "GIS"],
-      link: "https://portfolio-dimas-omega.vercel.app/port_1_deforestation_analysis/webmap.html",
+      title: "3D Flood Impact Visualization",
+      description: "Interactive 3D visualization of flood-affected buildings using MapLibre GL JS with terrain rendering. Simulates varying flood water levels over urban areas with 3D building extrusions, allowing stakeholders to assess flood damage and plan mitigation strategies.",
+      role: "GIS Developer & Data Scientist",
+      techStack: ["MapLibre GL JS", "3D Terrain", "DEM", "JavaScript", "WebGL"],
+      link: "#flood-viz",
+      imageUrl: undefined,
       order: 1
     });
     await storage.createProject({
-      title: "Autocorrection Polygon",
-      description: "Designed and developed an interactive geospatial platform for environmental analysis and decision-making.",
-      role: "GIS Developer",
-      techStack: ["Web GIS", "Interactive Platform", "Javascript"],
-      link: "https://portfolio-dimas-omega.vercel.app/port_2_polygon_verification/polygon-detail.html",
+      title: "Deforestation Analysis",
+      description: "Conducted comprehensive deforestation analysis using satellite imagery to monitor and assess forest cover changes over time. Applied machine learning classifiers on multi-temporal Landsat/Sentinel data.",
+      role: "GIS Specialist",
+      techStack: ["Remote Sensing", "Satellite Imagery", "GIS", "Python"],
+      link: "https://portfolio-dimas-omega.vercel.app/port_1_deforestation_analysis/webmap.html",
       order: 2
-    });
-    await storage.createProject({
-      title: "Carbon Stock Analysis",
-      description: "Led the integration of remote sensing data with climate models to assess and predict environmental impacts.",
-      role: "Climate Lead",
-      techStack: ["Climate Models", "Remote Sensing", "Data Integration"],
-      link: "https://portfolio-dimas-omega.vercel.app/port_3_Carbon%20Stock%20Analysis/index.html",
-      order: 3
-    });
-    await storage.createProject({
-      title: "Emission Dashboard",
-      description: "Automated workflows for geospatial data processing and analysis using Python and cloud-based solutions.",
-      role: "Data Scientist",
-      techStack: ["Python", "Cloud Solutions", "Dashboard"],
-      link: "https://portfolio-dimas-omega.vercel.app/port_4_ghg_dashboard/index.html",
-      order: 4
     });
   }
 }

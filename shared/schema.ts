@@ -1,88 +1,115 @@
-import { pgTable, text, serial, integer, boolean, timestamp } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-// === TABLE DEFINITIONS ===
+// === TYPE DEFINITIONS (No database required) ===
 
-export const projects = pgTable("projects", {
-  id: serial("id").primaryKey(),
-  title: text("title").notNull(),
-  description: text("description").notNull(),
-  role: text("role"),
-  techStack: text("tech_stack").array(),
-  imageUrl: text("image_url"),
-  link: text("link"),
-  order: integer("order").default(0),
+export interface Project {
+  id: number;
+  title: string;
+  description: string;
+  role: string | null;
+  techStack: string[] | null;
+  imageUrl: string | null;
+  link: string | null;
+  order: number | null;
+}
+
+export interface Skill {
+  id: number;
+  name: string;
+  category: string;
+  proficiency: number | null;
+  icon: string | null;
+}
+
+export interface Experience {
+  id: number;
+  company: string;
+  role: string;
+  duration: string;
+  description: string;
+  location: string | null;
+  order: number | null;
+}
+
+export interface Education {
+  id: number;
+  institution: string;
+  degree: string;
+  year: string;
+  description: string | null;
+  order: number | null;
+}
+
+export interface Testimony {
+  id: number;
+  name: string;
+  role: string | null;
+  content: string;
+  avatarUrl: string | null;
+}
+
+export interface Message {
+  id: number;
+  name: string;
+  email: string;
+  message: string;
+  createdAt: Date | null;
+}
+
+// === INSERT SCHEMAS ===
+
+export const insertProjectSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  role: z.string().optional(),
+  techStack: z.array(z.string()).optional(),
+  imageUrl: z.string().optional(),
+  link: z.string().optional(),
+  order: z.number().optional(),
 });
 
-export const skills = pgTable("skills", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  category: text("category").notNull(), // e.g., "GIS", "Development", "Data"
-  proficiency: integer("proficiency"), // 1-100
-  icon: text("icon"), // Icon name
+export const insertSkillSchema = z.object({
+  name: z.string(),
+  category: z.string(),
+  proficiency: z.number().optional(),
+  icon: z.string().optional(),
 });
 
-export const experiences = pgTable("experiences", {
-  id: serial("id").primaryKey(),
-  company: text("company").notNull(),
-  role: text("role").notNull(),
-  duration: text("duration").notNull(),
-  description: text("description").notNull(),
-  location: text("location"),
-  order: integer("order").default(0),
+export const insertExperienceSchema = z.object({
+  company: z.string(),
+  role: z.string(),
+  duration: z.string(),
+  description: z.string(),
+  location: z.string().optional(),
+  order: z.number().optional(),
 });
 
-export const educations = pgTable("educations", {
-  id: serial("id").primaryKey(),
-  institution: text("institution").notNull(),
-  degree: text("degree").notNull(),
-  year: text("year").notNull(),
-  description: text("description"),
-  order: integer("order").default(0),
+export const insertEducationSchema = z.object({
+  institution: z.string(),
+  degree: z.string(),
+  year: z.string(),
+  description: z.string().optional(),
+  order: z.number().optional(),
 });
 
-export const testimonies = pgTable("testimonies", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  role: text("role"),
-  content: text("content").notNull(),
-  avatarUrl: text("avatar_url"),
+export const insertTestimonySchema = z.object({
+  name: z.string(),
+  role: z.string().optional(),
+  content: z.string(),
+  avatarUrl: z.string().optional(),
 });
 
-export const messages = pgTable("messages", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  email: text("email").notNull(),
-  message: text("message").notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
+export const insertMessageSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Valid email required"),
+  message: z.string().min(1, "Message is required"),
 });
 
-// === SCHEMAS ===
+// === INSERT TYPES ===
 
-export const insertProjectSchema = createInsertSchema(projects).omit({ id: true });
-export const insertSkillSchema = createInsertSchema(skills).omit({ id: true });
-export const insertExperienceSchema = createInsertSchema(experiences).omit({ id: true });
-export const insertEducationSchema = createInsertSchema(educations).omit({ id: true });
-export const insertTestimonySchema = createInsertSchema(testimonies).omit({ id: true });
-export const insertMessageSchema = createInsertSchema(messages).omit({ id: true, createdAt: true });
-
-// === TYPES ===
-
-export type Project = typeof projects.$inferSelect;
 export type InsertProject = z.infer<typeof insertProjectSchema>;
-
-export type Skill = typeof skills.$inferSelect;
 export type InsertSkill = z.infer<typeof insertSkillSchema>;
-
-export type Experience = typeof experiences.$inferSelect;
 export type InsertExperience = z.infer<typeof insertExperienceSchema>;
-
-export type Education = typeof educations.$inferSelect;
 export type InsertEducation = z.infer<typeof insertEducationSchema>;
-
-export type Testimony = typeof testimonies.$inferSelect;
 export type InsertTestimony = z.infer<typeof insertTestimonySchema>;
-
-export type Message = typeof messages.$inferSelect;
 export type InsertMessage = z.infer<typeof insertMessageSchema>;

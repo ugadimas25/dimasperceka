@@ -1,12 +1,15 @@
 import { z } from 'zod';
 import { 
-  insertMessageSchema, 
-  projects, 
-  skills, 
-  experiences, 
-  educations,
-  testimonies
+  insertMessageSchema,
+  type InsertMessage,
+  type Project,
+  type Skill,
+  type Experience,
+  type Education,
+  type Testimony,
 } from './schema';
+
+export type { InsertMessage };
 
 export const errorSchemas = {
   validation: z.object({
@@ -24,7 +27,7 @@ export const api = {
       method: 'GET' as const,
       path: '/api/projects' as const,
       responses: {
-        200: z.array(z.custom<typeof projects.$inferSelect>()),
+        200: z.array(z.custom<Project>()),
       },
     },
   },
@@ -33,7 +36,7 @@ export const api = {
       method: 'GET' as const,
       path: '/api/skills' as const,
       responses: {
-        200: z.array(z.custom<typeof skills.$inferSelect>()),
+        200: z.array(z.custom<Skill>()),
       },
     },
   },
@@ -42,7 +45,7 @@ export const api = {
       method: 'GET' as const,
       path: '/api/experiences' as const,
       responses: {
-        200: z.array(z.custom<typeof experiences.$inferSelect>()),
+        200: z.array(z.custom<Experience>()),
       },
     },
   },
@@ -51,7 +54,7 @@ export const api = {
       method: 'GET' as const,
       path: '/api/educations' as const,
       responses: {
-        200: z.array(z.custom<typeof educations.$inferSelect>()),
+        200: z.array(z.custom<Education>()),
       },
     },
   },
@@ -60,7 +63,7 @@ export const api = {
       method: 'GET' as const,
       path: '/api/testimonies' as const,
       responses: {
-        200: z.array(z.custom<typeof testimonies.$inferSelect>()),
+        200: z.array(z.custom<Testimony>()),
       },
     },
   },
@@ -76,16 +79,3 @@ export const api = {
     },
   },
 };
-
-// Helper for frontend URL building
-export function buildUrl(path: string, params?: Record<string, string | number>): string {
-  let url = path;
-  if (params) {
-    Object.entries(params).forEach(([key, value]) => {
-      if (url.includes(`:${key}`)) {
-        url = url.replace(`:${key}`, String(value));
-      }
-    });
-  }
-  return url;
-}
