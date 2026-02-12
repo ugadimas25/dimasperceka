@@ -325,7 +325,7 @@ type BasemapKey = "osm" | "satellite" | "dark";
 const BASEMAPS: Record<BasemapKey, { label: string; tiles: string; attr: string }> = {
   osm: { label: "Street", tiles: "https://tile.openstreetmap.org/{z}/{x}/{y}.png", attr: "© OSM" },
   satellite: { label: "Satellite", tiles: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", attr: "© Esri" },
-  dark: { label: "Dark", tiles: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", attr: "© CARTO" },
+  dark: { label: "Dark", tiles: "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png", attr: "© CARTO" },
 };
 
 type CalculationType = "AVERAGE PER FARMER" | "AVERAGE PER HECTARE" | "AVERAGE PER TON CROP" | "SUM OF ALL FARMERS";

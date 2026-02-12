@@ -50,7 +50,7 @@ const BASEMAPS: Record<BasemapKey, { label: string; tiles: string; attr: string 
   },
   dark: {
     label: "Dark",
-    tiles: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    tiles: "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
     attr: "&copy; CARTO",
   },
 };
