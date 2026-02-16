@@ -21,7 +21,7 @@ export function ExperienceCard({ experience, index }: { experience: Experience; 
         <div className="md:w-1/2 mb-8 md:mb-0" />
         
         <div className={`md:w-1/2 ${index % 2 === 0 ? "md:pl-12" : "md:pr-12 md:text-right"}`}>
-          <div className="glass-card p-6 rounded-xl border border-white/5 hover:border-primary/30 transition-all duration-300 group">
+          <div className="glass-card p-6 rounded-xl border border-border/50 hover:border-primary/30 transition-all duration-300 group">
             <header className={`mb-4 ${index % 2 !== 0 ? "md:flex md:flex-col md:items-end" : ""}`}>
               <h3 className="text-xl font-bold font-display text-foreground group-hover:text-primary transition-colors">
                 {experience.role}

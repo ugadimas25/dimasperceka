@@ -42,7 +42,7 @@ export function Navigation() {
             <Map className="w-4 h-4 text-secondary absolute -bottom-1 -right-1" />
           </div>
           <div className="flex flex-col">
-            <span className="font-display font-bold text-lg leading-none tracking-wide text-white group-hover:text-primary transition-colors">
+            <span className="font-display font-bold text-lg leading-none tracking-wide text-foreground group-hover:text-primary transition-colors">
               DIMAS PERCEKA
             </span>
             <span className="font-mono text-[10px] text-muted-foreground tracking-wider">
@@ -92,7 +92,7 @@ export function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border overflow-hidden"
+            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border/60 overflow-hidden"
           >
             <div className="container mx-auto px-4 py-8 flex flex-col gap-6">
               {links.map((link) => (

@@ -277,6 +277,103 @@ function generateFarmPolygon(lat: number, lng: number, sizeKm: number): [number,
   ];
 }
 
+// Generate curved arc between two points (like airplane flight paths)
+function generateArc(
+  start: [number, number], // [lng, lat]
+  end: [number, number],
+  numPoints: number = 60,
+): [number, number][] {
+  const points: [number, number][] = [];
+  const dx = end[0] - start[0];
+  const dy = end[1] - start[1];
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  // Perpendicular offset for curvature — scales with line length
+  const curvature = 0.25 + dist * 0.15;
+  const midLng = (start[0] + end[0]) / 2 + (-dy) * curvature;
+  const midLat = (start[1] + end[1]) / 2 + dx * curvature;
+  for (let i = 0; i <= numPoints; i++) {
+    const t = i / numPoints;
+    // Quadratic Bezier
+    const lng = (1 - t) * (1 - t) * start[0] + 2 * (1 - t) * t * midLng + t * t * end[0];
+    const lat = (1 - t) * (1 - t) * start[1] + 2 * (1 - t) * t * midLat + t * t * end[1];
+    points.push([lng, lat]);
+  }
+  return points;
+}
+
+// Extra heatmap density points scattered across the supply chain area
+const HEATMAP_EXTRA_POINTS: { lat: number; lng: number; emission: number }[] = [
+  // ── High emission cluster: Palu port / warehouse area ──
+  { lat: -0.88, lng: 119.85, emission: 2800 },
+  { lat: -0.92, lng: 119.90, emission: 2600 },
+  { lat: -0.85, lng: 119.88, emission: 2400 },
+  { lat: -0.95, lng: 119.82, emission: 2200 },
+  { lat: -0.90, lng: 119.95, emission: 2100 },
+  { lat: -0.87, lng: 119.78, emission: 1900 },
+  { lat: -0.93, lng: 119.86, emission: 2700 },
+  { lat: -0.89, lng: 119.92, emission: 2300 },
+  { lat: -0.86, lng: 119.83, emission: 2500 },
+  { lat: -0.91, lng: 119.75, emission: 1800 },
+  { lat: -0.94, lng: 119.93, emission: 2000 },
+  { lat: -0.84, lng: 119.87, emission: 1700 },
+  // ── Transport corridor (Palu → production areas) ──
+  { lat: -1.00, lng: 119.95, emission: 1500 },
+  { lat: -1.02, lng: 120.00, emission: 1400 },
+  { lat: -1.05, lng: 120.05, emission: 1350 },
+  { lat: -1.08, lng: 120.12, emission: 1300 },
+  { lat: -1.10, lng: 120.18, emission: 1200 },
+  { lat: -1.13, lng: 120.22, emission: 1100 },
+  { lat: -1.15, lng: 120.28, emission: 1050 },
+  { lat: -1.18, lng: 120.32, emission: 1000 },
+  { lat: -1.20, lng: 120.38, emission: 950 },
+  { lat: -1.22, lng: 120.42, emission: 900 },
+  { lat: -1.25, lng: 120.48, emission: 850 },
+  { lat: -1.28, lng: 120.52, emission: 800 },
+  { lat: -1.30, lng: 120.58, emission: 750 },
+  { lat: -1.33, lng: 120.62, emission: 700 },
+  // ── Production area clusters (high activity) ──
+  // Parigi Moutong cluster
+  { lat: -1.43, lng: 120.78, emission: 1800 },
+  { lat: -1.45, lng: 120.82, emission: 1700 },
+  { lat: -1.47, lng: 120.76, emission: 1600 },
+  { lat: -1.44, lng: 120.85, emission: 1900 },
+  { lat: -1.46, lng: 120.80, emission: 2000 },
+  { lat: -1.41, lng: 120.79, emission: 1500 },
+  { lat: -1.49, lng: 120.83, emission: 1400 },
+  // Donggala cluster
+  { lat: -1.38, lng: 120.72, emission: 1600 },
+  { lat: -1.40, lng: 120.68, emission: 1500 },
+  { lat: -1.37, lng: 120.75, emission: 1400 },
+  { lat: -1.39, lng: 120.70, emission: 1700 },
+  { lat: -1.42, lng: 120.66, emission: 1300 },
+  { lat: -1.36, lng: 120.71, emission: 1200 },
+  // Sigi cluster
+  { lat: -1.58, lng: 120.88, emission: 1900 },
+  { lat: -1.60, lng: 120.92, emission: 2100 },
+  { lat: -1.62, lng: 120.85, emission: 1800 },
+  { lat: -1.57, lng: 120.90, emission: 2000 },
+  { lat: -1.55, lng: 120.86, emission: 1700 },
+  { lat: -1.63, lng: 120.93, emission: 1600 },
+  // Poso cluster
+  { lat: -1.42, lng: 121.00, emission: 1400 },
+  { lat: -1.40, lng: 120.98, emission: 1300 },
+  { lat: -1.38, lng: 121.02, emission: 1500 },
+  { lat: -1.35, lng: 120.95, emission: 1200 },
+  { lat: -1.44, lng: 121.05, emission: 1600 },
+  { lat: -1.37, lng: 120.97, emission: 1100 },
+  // ── Scattered emission points ──
+  { lat: -1.10, lng: 120.50, emission: 450 },
+  { lat: -1.20, lng: 120.60, emission: 380 },
+  { lat: -1.30, lng: 120.75, emission: 520 },
+  { lat: -1.50, lng: 120.95, emission: 420 },
+  { lat: -1.15, lng: 120.40, emission: 350 },
+  { lat: -1.00, lng: 120.30, emission: 300 },
+  { lat: -0.97, lng: 120.15, emission: 480 },
+  { lat: -1.35, lng: 120.85, emission: 550 },
+  { lat: -1.52, lng: 120.72, emission: 600 },
+  { lat: -1.48, lng: 120.60, emission: 680 },
+];
+
 // Actor color scheme
 const ACTOR_COLORS: Record<ActorType, string> = {
   producer: "#2BBE72",
@@ -366,6 +463,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
+  const animationRef = useRef<number | null>(null);
 
   const [isActivated, setIsActivated] = useState(fullPage);
   const [mapLoaded, setMapLoaded] = useState(false);
@@ -441,7 +539,12 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
     });
     mapRef.current = map;
 
-    return () => { map.remove(); mapRef.current = null; setMapLoaded(false); };
+    return () => {
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+      map.remove();
+      mapRef.current = null;
+      setMapLoaded(false);
+    };
   }, [isActivated]);
 
   // ── Switch Basemap ──────────────────────────────────────────────────────
@@ -501,7 +604,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
       paint: { "line-color": "#1F4788", "line-width": 1.5, "line-opacity": showPolygons ? 0.6 : 0 },
     });
 
-    // 2. Transaction Polylines
+    // 2. Transaction Polylines (curved arcs like airplane flight paths)
     const txGeoJson: GeoJSON.FeatureCollection = {
       type: "FeatureCollection",
       features: DEMO_TRANSACTIONS.map(tx => {
@@ -510,11 +613,12 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
         const fromType = from.type;
         const toType = to.type;
         const colorKey = `${fromType}-${toType}`;
+        const arcCoords = generateArc([from.lng, from.lat], [to.lng, to.lat]);
         return {
           type: "Feature" as const,
           geometry: {
             type: "LineString" as const,
-            coordinates: [[from.lng, from.lat], [to.lng, to.lat]],
+            coordinates: arcCoords,
           },
           properties: { id: tx.id, color: LINE_COLORS[colorKey] ?? "#999" },
         };
@@ -526,11 +630,33 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
       id: "transactions-line", type: "line", source: "transactions",
       paint: {
         "line-color": ["get", "color"],
-        "line-width": 2,
-        "line-opacity": showPolylines ? 0.8 : 0,
-        "line-dasharray": [4, 2],
+        "line-width": 2.5,
+        "line-opacity": showPolylines ? 0.85 : 0,
+        "line-dasharray": [0, 4, 3],
       },
     });
+
+    // Animate dashed lines — flowing "marching ants" effect like flight paths
+    if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    const dashSeq: number[][] = [
+      [0, 4, 3], [0.5, 4, 2.5], [1, 4, 2], [1.5, 4, 1.5],
+      [2, 4, 1], [2.5, 4, 0.5], [3, 4, 0],
+      [0, 0.5, 3, 3.5], [0, 1, 3, 3], [0, 1.5, 3, 2.5],
+      [0, 2, 3, 2], [0, 2.5, 3, 1.5], [0, 3, 3, 1], [0, 3.5, 3, 0.5],
+    ];
+    let dashIdx = 0;
+    let lastDashTime = 0;
+    const animateDash = (ts: number) => {
+      if (ts - lastDashTime > 80) {
+        lastDashTime = ts;
+        dashIdx = (dashIdx + 1) % dashSeq.length;
+        if (map.getLayer("transactions-line")) {
+          map.setPaintProperty("transactions-line", "line-dasharray", dashSeq[dashIdx]);
+        }
+      }
+      animationRef.current = requestAnimationFrame(animateDash);
+    };
+    animationRef.current = requestAnimationFrame(animateDash);
 
     // 3. Actor markers
     const actorGeoJson: GeoJSON.FeatureCollection = {
@@ -585,14 +711,20 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
       paint: { "text-color": "#ffffff", "text-halo-color": "#000000", "text-halo-width": 1 },
     });
 
-    // 4. Emission Heatmap (separate layer)
+    // 4. Emission Heatmap (separate layer) — includes extra density points
+    const actorHeatFeatures = ALL_ACTORS.filter(a => a.emission).map(a => ({
+      type: "Feature" as const,
+      geometry: { type: "Point" as const, coordinates: [a.lng, a.lat] },
+      properties: { emission: a.emission!.totalCo2eq },
+    }));
+    const extraHeatFeatures = HEATMAP_EXTRA_POINTS.map(p => ({
+      type: "Feature" as const,
+      geometry: { type: "Point" as const, coordinates: [p.lng, p.lat] },
+      properties: { emission: p.emission },
+    }));
     const heatGeoJson: GeoJSON.FeatureCollection = {
       type: "FeatureCollection",
-      features: ALL_ACTORS.filter(a => a.emission).map(a => ({
-        type: "Feature" as const,
-        geometry: { type: "Point" as const, coordinates: [a.lng, a.lat] },
-        properties: { emission: a.emission!.totalCo2eq },
-      })),
+      features: [...actorHeatFeatures, ...extraHeatFeatures],
     };
 
     map.addSource("emission-heat", { type: "geojson", data: heatGeoJson });
@@ -600,8 +732,8 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
       id: "emission-heatmap", type: "heatmap", source: "emission-heat",
       paint: {
         "heatmap-weight": ["interpolate", ["linear"], ["get", "emission"], 0, 0, 3000, 1],
-        "heatmap-intensity": 1.2,
-        "heatmap-radius": 40,
+        "heatmap-intensity": 1.6,
+        "heatmap-radius": 50,
         "heatmap-opacity": showEmissionHeatmap ? 0.55 : 0,
         "heatmap-color": [
           "interpolate", ["linear"], ["heatmap-density"],
@@ -656,17 +788,17 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
         className="relative w-full h-[500px] rounded-xl overflow-hidden cursor-pointer group"
         onClick={() => setIsActivated(true)}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/80 via-amber-900/60 to-red-900/50 z-10 flex flex-col items-center justify-center gap-4">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#006d2c]/80 via-[#006d2c]/60 to-[#006d2c]/50 z-10 flex flex-col items-center justify-center gap-4">
           <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ repeat: Infinity, duration: 2 }}>
-            <div className="w-20 h-20 rounded-full bg-emerald-500/20 border-2 border-emerald-400/50 flex items-center justify-center">
-              <Leaf className="w-10 h-10 text-emerald-400" />
+            <div className="w-20 h-20 rounded-full bg-[#2ca25f]/20 border-2 border-[#66c2a4]/50 flex items-center justify-center">
+              <Leaf className="w-10 h-10 text-[#66c2a4]" />
             </div>
           </motion.div>
           <h3 className="text-xl font-bold text-white">Supplychain Emission Tracker</h3>
           <p className="text-sm text-white/70 max-w-md text-center">
             Interactive supply chain traceability map with integrated CoolFarmTool carbon emission analysis
           </p>
-          <span className="text-xs text-emerald-300 font-mono mt-2">Click to activate</span>
+          <span className="text-xs text-[#99d8c9] font-mono mt-2">Click to activate</span>
         </div>
         <img
           src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=60&w=1200"
@@ -693,7 +825,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
   const sectionGap = fullPage ? "space-y-3" : "space-y-2";
 
   return (
-    <div className={`relative w-full ${fullPage ? "h-screen" : "h-[500px] rounded-xl"} overflow-hidden bg-gray-900`}>
+    <div className={`relative w-full ${fullPage ? "h-screen" : "h-[500px] rounded-xl"} overflow-hidden bg-[#006d2c]`}>
       {/* Map Container */}
       <div ref={mapContainer} className="absolute inset-0 w-full h-full z-0" />
 
@@ -708,7 +840,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
             </Link>
           )}
           <div className="flex items-center gap-2">
-            <Leaf className={`${fullPage ? "w-4 h-4" : "w-3.5 h-3.5"} text-emerald-400`} />
+            <Leaf className={`${fullPage ? "w-4 h-4" : "w-3.5 h-3.5"} text-[#66c2a4]`} />
             <span className={`${szTitle} text-white`}>Supplychain Emission Tracker</span>
           </div>
           <span className={`${szSm} text-white/40 hidden sm:inline`}>
@@ -724,7 +856,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
               onClick={() => setBasemap(key)}
               className={`px-2 py-1 rounded ${szSm} transition-colors ${
                 basemap === key
-                  ? "bg-emerald-500/30 text-emerald-300 border border-emerald-500/40"
+                  ? "bg-[#2ca25f]/30 text-[#99d8c9] border border-[#2ca25f]/40"
                   : "text-white/50 hover:text-white/80"
               }`}
             >
@@ -792,7 +924,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
                 </div>
                 <button
                   onClick={() => renderSupplyChain()}
-                  className={`w-full ${fullPage ? "py-2.5 text-sm" : "py-1.5 text-[10px]"} bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg transition-colors`}
+                  className={`w-full ${fullPage ? "py-2.5 text-sm" : "py-1.5 text-[10px]"} bg-[#2ca25f] hover:bg-[#2ca25f] text-white font-semibold rounded-lg transition-colors`}
                 >
                   Process
                 </button>
@@ -801,8 +933,8 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
               {/* Emission Filter */}
               <div className={`bg-white/5 rounded-xl ${sectionPad} ${fullPage ? "mb-4" : "mb-3"} ${sectionGap}`}>
                 <div className={`flex items-center gap-1.5 ${fullPage ? "mb-1.5" : "mb-1"}`}>
-                  <Leaf className={`${fullPage ? "w-4 h-4" : "w-3 h-3"} text-emerald-400`} />
-                  <span className={`${szLabel} text-emerald-300 font-medium`}>Emission (CFT)</span>
+                  <Leaf className={`${fullPage ? "w-4 h-4" : "w-3 h-3"} text-[#66c2a4]`} />
+                  <span className={`${szLabel} text-[#99d8c9] font-medium`}>Emission (CFT)</span>
                 </div>
                 <div>
                   <label className={`${szLabel} text-white/50 block ${fullPage ? "mb-1" : "mb-0.5"}`}>Year</label>
@@ -869,12 +1001,12 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
                 <button
                   onClick={() => setShowEmissionHeatmap(!showEmissionHeatmap)}
                   className={`flex items-center gap-2 w-full ${fullPage ? "px-2.5 py-1.5" : "px-2 py-1"} rounded-lg text-left transition-colors ${
-                    showEmissionHeatmap ? "bg-emerald-500/10 border border-emerald-500/20" : "opacity-40"
+                    showEmissionHeatmap ? "bg-[#2ca25f]/10 border border-[#2ca25f]/20" : "opacity-40"
                   }`}
                 >
-                  <Leaf className={`${fullPage ? "w-4 h-4" : "w-3 h-3"} text-emerald-400`} />
-                  <span className={`${szLabel} text-emerald-300 flex-1`}>Emission Heatmap</span>
-                  {showEmissionHeatmap ? <Eye className={`${fullPage ? "w-4 h-4" : "w-3 h-3"} text-emerald-400/60`} /> : <EyeOff className={`${fullPage ? "w-4 h-4" : "w-3 h-3"} text-white/20`} />}
+                  <Leaf className={`${fullPage ? "w-4 h-4" : "w-3 h-3"} text-[#66c2a4]`} />
+                  <span className={`${szLabel} text-[#99d8c9] flex-1`}>Emission Heatmap</span>
+                  {showEmissionHeatmap ? <Eye className={`${fullPage ? "w-4 h-4" : "w-3 h-3"} text-[#66c2a4]/60`} /> : <EyeOff className={`${fullPage ? "w-4 h-4" : "w-3 h-3"} text-white/20`} />}
                 </button>
               </div>
 
@@ -886,7 +1018,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
                     background: `linear-gradient(90deg, ${EMISSION_GRADIENT.map(g => g.color).join(", ")})`,
                   }} />
                   <div className="flex justify-between">
-                    <span className={`${szLabel} text-emerald-400`}>Low</span>
+                    <span className={`${szLabel} text-[#66c2a4]`}>Low</span>
                     <span className={`${szLabel} text-red-400`}>High</span>
                   </div>
                 </div>
@@ -900,7 +1032,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
                   <div className={`${szLabel} text-white/70`}>Traders: <strong className="text-white">{DEMO_TRADERS.length}</strong></div>
                   <div className={`${szLabel} text-white/70`}>Warehouses: <strong className="text-white">1</strong></div>
                   <div className={`${szLabel} text-white/70`}>Transactions: <strong className="text-white">{DEMO_TRANSACTIONS.length}</strong></div>
-                  <div className={`${szLabel} text-emerald-300`}>
+                  <div className={`${szLabel} text-[#99d8c9]`}>
                     Total CO₂eq: <strong>{emissionSummary.total.toLocaleString("en", { maximumFractionDigits: 1 })} kg</strong>
                   </div>
                 </div>
@@ -927,8 +1059,8 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
             {/* Header */}
             <div className="flex items-center gap-3 p-3 border-b border-white/10">
               <div className={`${fullPage ? "w-10 h-10" : "w-8 h-8"} rounded-full bg-white/10 flex items-center justify-center`}>
-                {selectedActor.type === "producer" ? <Users className={`${fullPage ? "w-5 h-5" : "w-4 h-4"} text-emerald-400`} /> :
-                 selectedActor.type === "trader" ? <Truck className={`${fullPage ? "w-5 h-5" : "w-4 h-4"} text-amber-400`} /> :
+                {selectedActor.type === "producer" ? <Users className={`${fullPage ? "w-5 h-5" : "w-4 h-4"} text-[#66c2a4]`} /> :
+                 selectedActor.type === "trader" ? <Truck className={`${fullPage ? "w-5 h-5" : "w-4 h-4"} text-[#66c2a4]`} /> :
                  <Factory className={`${fullPage ? "w-5 h-5" : "w-4 h-4"} text-red-400`} />}
               </div>
               <div className="flex-1 min-w-0">
@@ -957,7 +1089,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
                   onClick={() => setDetailTab(tab.key)}
                   className={`flex-1 py-2 ${szSm} font-medium border-b-2 transition-colors flex items-center justify-center gap-1 ${
                     detailTab === tab.key
-                      ? "border-emerald-400 text-emerald-400"
+                      ? "border-[#66c2a4] text-[#66c2a4]"
                       : "border-transparent text-white/40 hover:text-white/60"
                   }`}
                 >
@@ -1032,7 +1164,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
                           </tbody>
                         </table>
                       </div>
-                      <button className={`flex items-center gap-1 ml-auto px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white ${szSm} font-semibold rounded-lg`}>
+                      <button className={`flex items-center gap-1 ml-auto px-3 py-1.5 bg-[#2ca25f] hover:bg-[#2ca25f] text-white ${szSm} font-semibold rounded-lg`}>
                         <Download className="w-3 h-3" /> Download
                       </button>
                     </>
@@ -1046,7 +1178,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
                   {selectedActor.emission ? (
                     <>
                       {/* Total Badge */}
-                      <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 rounded-lg p-3 text-center">
+                      <div className="bg-gradient-to-r from-[#2ca25f] to-emerald-700 rounded-lg p-3 text-center">
                         <div className={`${fullPage ? "text-2xl" : "text-xl"} font-bold text-white`}>
                           {selectedActor.emission.totalCo2eq.toLocaleString("en", { maximumFractionDigits: 1 })}
                         </div>
@@ -1124,8 +1256,8 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
           onClick={() => setShowEmissionDash(!showEmissionDash)}
           className={`mx-auto flex items-center gap-2 bg-black/70 backdrop-blur-sm border border-white/10 px-4 py-1.5 rounded-t-lg ${szSm} font-medium text-white/70 hover:text-white hover:bg-black/80 transition-colors`}
         >
-          <Leaf className="w-3.5 h-3.5 text-emerald-400" />
-          Total: <strong className="text-emerald-300">{emissionSummary.total.toLocaleString("en", { maximumFractionDigits: 1 })}</strong> {getEmissionUnit(emissionCalc)}
+          <Leaf className="w-3.5 h-3.5 text-[#66c2a4]" />
+          Total: <strong className="text-[#99d8c9]">{emissionSummary.total.toLocaleString("en", { maximumFractionDigits: 1 })}</strong> {getEmissionUnit(emissionCalc)}
           {showEmissionDash ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
         </button>
 
@@ -1140,7 +1272,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
             >
               <div className="p-4 flex gap-4">
                 {/* Total Card */}
-                <div className="w-44 shrink-0 bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-xl p-4 flex flex-col justify-center text-center">
+                <div className="w-44 shrink-0 bg-gradient-to-br from-[#2ca25f] to-emerald-800 rounded-xl p-4 flex flex-col justify-center text-center">
                   <div className={`${fullPage ? "text-2xl" : "text-xl"} font-bold text-white`}>
                     {emissionSummary.total.toLocaleString("en", { maximumFractionDigits: 0 })}
                   </div>
@@ -1194,11 +1326,11 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
               onClick={e => e.stopPropagation()}
-              className={`bg-gray-900 border border-white/10 rounded-2xl ${fullPage ? "p-6 max-w-lg" : "p-4 max-w-sm"} w-full`}
+              className={`bg-[#006d2c] border border-white/10 rounded-2xl ${fullPage ? "p-6 max-w-lg" : "p-4 max-w-sm"} w-full`}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <Leaf className={`${fullPage ? "w-5 h-5" : "w-4 h-4"} text-emerald-400`} />
+                  <Leaf className={`${fullPage ? "w-5 h-5" : "w-4 h-4"} text-[#66c2a4]`} />
                   <span className={`${sz} font-bold text-white`}>Supplychain Emission</span>
                 </div>
                 <button onClick={() => setShowGuide(false)} className="text-white/40 hover:text-white">
@@ -1216,17 +1348,17 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.1 }}
                       className={`flex items-start gap-3 p-2 rounded-lg ${
-                        i === guideStep ? "bg-emerald-500/10 border border-emerald-500/20" : "bg-white/5"
+                        i === guideStep ? "bg-[#2ca25f]/10 border border-[#2ca25f]/20" : "bg-white/5"
                       }`}
                       onClick={() => setGuideStep(i)}
                     >
                       <div className={`shrink-0 w-8 h-8 rounded-lg flex items-center justify-center ${
-                        i === guideStep ? "bg-emerald-500/20" : "bg-white/5"
+                        i === guideStep ? "bg-[#2ca25f]/20" : "bg-white/5"
                       }`}>
-                        <Icon className={`w-4 h-4 ${i === guideStep ? "text-emerald-400" : "text-white/40"}`} />
+                        <Icon className={`w-4 h-4 ${i === guideStep ? "text-[#66c2a4]" : "text-white/40"}`} />
                       </div>
                       <div>
-                        <div className={`${szSm} font-semibold ${i === guideStep ? "text-emerald-300" : "text-white/70"}`}>
+                        <div className={`${szSm} font-semibold ${i === guideStep ? "text-[#99d8c9]" : "text-white/70"}`}>
                           {step.title}
                         </div>
                         <div className={`${szSm} ${i === guideStep ? "text-white/60" : "text-white/30"}`}>
@@ -1242,7 +1374,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
                 <div className="flex gap-1">
                   {GUIDE_STEPS.map((_, i) => (
                     <div key={i} className={`w-2 h-2 rounded-full transition-colors ${
-                      i === guideStep ? "bg-emerald-400" : "bg-white/20"
+                      i === guideStep ? "bg-[#66c2a4]" : "bg-white/20"
                     }`} />
                   ))}
                 </div>
@@ -1251,7 +1383,7 @@ export function SupplychainEmission({ fullPage = false }: { fullPage?: boolean }
                     if (guideStep < GUIDE_STEPS.length - 1) setGuideStep(g => g + 1);
                     else setShowGuide(false);
                   }}
-                  className={`px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white ${szSm} font-semibold rounded-lg transition-colors`}
+                  className={`px-4 py-1.5 bg-[#2ca25f] hover:bg-[#2ca25f] text-white ${szSm} font-semibold rounded-lg transition-colors`}
                 >
                   {guideStep < GUIDE_STEPS.length - 1 ? "Next" : "Start Exploring"}
                 </button>

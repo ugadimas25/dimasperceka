@@ -43,7 +43,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           {project.title}
         </h3>
         
-        <div className={`p-6 bg-card/50 backdrop-blur-sm border border-white/5 rounded-lg shadow-xl mb-6 text-muted-foreground relative z-20 ${!isEven ? "md:-mr-20" : "md:-ml-20"}`}>
+        <div className={`p-6 bg-card/70 backdrop-blur-sm border border-border/50 rounded-lg shadow-xl mb-6 text-muted-foreground relative z-20 ${!isEven ? "md:-mr-20" : "md:-ml-20"}`}>
           <p>{project.description}</p>
         </div>
 

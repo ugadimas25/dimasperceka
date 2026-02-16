@@ -98,8 +98,8 @@ function generateTimeSeries(field: DtField): TimeSeries[] {
 
 function SeverityBadge({ severity }: { severity: AlertSeverity }) {
   const styles: Record<AlertSeverity, string> = {
-    low: "border-emerald-400/20 bg-emerald-400/10 text-emerald-300",
-    medium: "border-sky-400/20 bg-sky-400/10 text-sky-300",
+    low: "border-[#66c2a4]/20 bg-[#66c2a4]/10 text-[#99d8c9]",
+    medium: "border-[#99d8c9]/20 bg-[#99d8c9]/10 text-[#ccece6]",
     high: "border-amber-400/25 bg-amber-400/10 text-amber-300",
     critical: "border-red-400/25 bg-red-500/10 text-red-300",
   };
@@ -113,8 +113,8 @@ function SeverityBadge({ severity }: { severity: AlertSeverity }) {
 
 type MetricTone = "primary" | "accent" | "warn" | "danger";
 const TONE_RING: Record<MetricTone, string> = {
-  primary: "ring-emerald-500/20 shadow-emerald-500/20",
-  accent: "ring-cyan-400/18 shadow-cyan-400/20",
+  primary: "ring-[#2ca25f]/20 shadow-[#2ca25f]/20",
+  accent: "ring-[#99d8c9]/18 shadow-[#99d8c9]/20",
   warn: "ring-amber-400/18 shadow-amber-400/20",
   danger: "ring-red-500/18 shadow-red-500/20",
 };
@@ -132,8 +132,8 @@ function MetricCard({ label, value, deltaPct, icon, tone = "primary" }: {
           <div className="mt-2 text-2xl font-extrabold tracking-tight text-white">{value}</div>
           {delta !== null && (
             <div className="mt-2 inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold">
-              {up ? <ArrowUpRight className="h-3 w-3 text-emerald-400" /> : <ArrowDownRight className="h-3 w-3 text-red-400" />}
-              <span className={up ? "text-emerald-400" : "text-red-400"}>{Math.abs(delta).toFixed(1)}%</span>
+              {up ? <ArrowUpRight className="h-3 w-3 text-[#66c2a4]" /> : <ArrowDownRight className="h-3 w-3 text-red-400" />}
+              <span className={up ? "text-[#66c2a4]" : "text-red-400"}>{Math.abs(delta).toFixed(1)}%</span>
             </div>
           )}
         </div>
@@ -152,10 +152,10 @@ function SelectSimple({ value, onChange, options, label }: {
       <select
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-emerald-500/40 transition-colors"
+        className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-[#2ca25f]/40 transition-colors"
       >
         {options.map(o => (
-          <option key={o.value} value={o.value} className="bg-gray-900 text-white">{o.label}</option>
+          <option key={o.value} value={o.value} className="bg-[#006d2c] text-white">{o.label}</option>
         ))}
       </select>
     </div>
@@ -387,7 +387,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
     return (
       <div
         onClick={() => setIsActivated(true)}
-        className="relative cursor-pointer rounded-xl overflow-hidden h-[500px] bg-gradient-to-br from-emerald-950/40 via-gray-900 to-gray-950 group"
+        className="relative cursor-pointer rounded-xl overflow-hidden h-[500px] bg-gradient-to-br from-[#006d2c]/40 via-[#006d2c] to-[#006d2c] group"
       >
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200')] bg-cover bg-center opacity-20" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -397,12 +397,12 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
             animate={{ scale: 1, opacity: 1 }}
             className="text-center"
           >
-            <Waves className="w-16 h-16 text-emerald-400 mx-auto mb-4" />
+            <Waves className="w-16 h-16 text-[#66c2a4] mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-white mb-2">Climate‑Smart Digital Twin</h3>
             <p className="text-gray-300 mb-6 max-w-md">
               Real‑time agricultural field monitoring with AI‑powered climate risk assessment
             </p>
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold group-hover:bg-emerald-500 transition-colors">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-[#2ca25f] text-white rounded-lg font-semibold group-hover:bg-[#2ca25f] transition-colors">
               <Activity className="w-5 h-5" /> Launch Dashboard
             </div>
           </motion.div>
@@ -425,10 +425,10 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
 
   return (
     <div
-      className={`relative w-full ${fullPage ? "min-h-screen" : "rounded-xl"} overflow-hidden bg-gray-950`}
+      className={`relative w-full ${fullPage ? "min-h-screen" : "rounded-xl"} overflow-hidden bg-[#006d2c]`}
     >
       {/* ── Header ─────────────────────────────────────────────────── */}
-      <div className="sticky top-0 z-40 border-b border-white/10 bg-gray-950/80 backdrop-blur-xl">
+      <div className="sticky top-0 z-40 border-b border-white/10 bg-[#006d2c]/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[1600px] items-center justify-between px-4 py-3 sm:px-6">
           <div className="flex items-center gap-3">
             {fullPage && (
@@ -439,9 +439,9 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
               </Link>
             )}
             <div className="relative">
-              <div className="absolute -inset-2 rounded-2xl bg-emerald-500/20 blur-xl" />
+              <div className="absolute -inset-2 rounded-2xl bg-[#2ca25f]/20 blur-xl" />
               <div className="relative grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-white/5 shadow-lg">
-                <Waves className="h-5 w-5 text-emerald-400" />
+                <Waves className="h-5 w-5 text-[#66c2a4]" />
               </div>
             </div>
             <div className="leading-tight">
@@ -456,7 +456,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/60">
               <span
-                className={`h-2 w-2 rounded-full ${wsConnected ? "bg-emerald-400" : "bg-white/30"}`}
+                className={`h-2 w-2 rounded-full ${wsConnected ? "bg-[#66c2a4]" : "bg-white/30"}`}
               />
               {wsConnected ? "Live" : "Connecting"}
             </span>
@@ -471,7 +471,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
       <div className="mx-auto max-w-[1600px] px-4 py-6 sm:px-6">
         {/* Section heading */}
         <div className="mb-6">
-          <div className="text-xs font-semibold uppercase tracking-wider text-emerald-400">
+          <div className="text-xs font-semibold uppercase tracking-wider text-[#66c2a4]">
             Dashboard
           </div>
           <div className="mt-1 text-2xl font-extrabold tracking-tight text-white">
@@ -503,7 +503,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
                   </div>
                 </div>
                 <div className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-[10px] text-white/40">
-                  <Factory className="h-4 w-4 text-emerald-400" />
+                  <Factory className="h-4 w-4 text-[#66c2a4]" />
                   Demo mode
                 </div>
               </div>
@@ -566,7 +566,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
                   max={100}
                   value={threshold}
                   onChange={(e) => setThreshold(Number(e.target.value))}
-                  className="mt-3 w-full accent-emerald-500"
+                  className="mt-3 w-full accent-[#2ca25f]"
                 />
               </div>
 
@@ -577,7 +577,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
                     type="checkbox"
                     checked={showFields}
                     onChange={(e) => setShowFields(e.target.checked)}
-                    className="accent-emerald-500"
+                    className="accent-[#2ca25f]"
                   />
                   <span className="text-xs font-semibold text-white/60">Field polygons</span>
                 </label>
@@ -589,7 +589,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
                     setLayer("ndvi");
                     setDateRange("30d");
                   }}
-                  className="rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 hover:shadow-xl transition-all"
+                  className="rounded-xl bg-gradient-to-r from-[#2ca25f] to-cyan-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-[#2ca25f]/20 hover:shadow-xl transition-all"
                 >
                   Reset
                 </button>
@@ -654,7 +654,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
                 <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-4">
                   <div className="flex items-center justify-between gap-3 mb-3">
                     <div className="flex items-center gap-2">
-                      <ShieldAlert className="h-4 w-4 text-emerald-400" />
+                      <ShieldAlert className="h-4 w-4 text-[#66c2a4]" />
                       <span className="text-sm font-extrabold tracking-tight text-white">
                         Recent alerts
                       </span>
@@ -713,7 +713,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
               {activeTab === "analytics" && (
                 <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-4">
                   <div className="flex items-center gap-2 mb-3">
-                    <Activity className="h-4 w-4 text-emerald-400" />
+                    <Activity className="h-4 w-4 text-[#66c2a4]" />
                     <span className="text-sm font-extrabold tracking-tight text-white">
                       Alert intensity
                     </span>
@@ -767,7 +767,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
               {activeTab === "stats" && (
                 <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-4">
                   <div className="flex items-center gap-2 mb-3">
-                    <MapPin className="h-4 w-4 text-emerald-400" />
+                    <MapPin className="h-4 w-4 text-[#66c2a4]" />
                     <span className="text-sm font-extrabold tracking-tight text-white">
                       Scope stats
                     </span>
@@ -881,7 +881,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
               <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-4">
                 <div className="flex items-center justify-between gap-3 mb-3">
                   <div className="flex items-center gap-2">
-                    <Waves className="h-4 w-4 text-cyan-400" />
+                    <Waves className="h-4 w-4 text-[#99d8c9]" />
                     <span className="text-sm font-extrabold tracking-tight text-white">
                       Layer notes
                     </span>
@@ -894,7 +894,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
                   <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3">
                     <span className="font-semibold text-white">NDVI</span> emphasizes
                     vegetation vigor;{" "}
-                    <span className="text-emerald-400">higher is healthier</span>.
+                    <span className="text-[#66c2a4]">higher is healthier</span>.
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3">
                     <span className="font-semibold text-white">Risk layers</span> surface
@@ -907,13 +907,13 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
 
             {/* Map */}
             <div className="relative overflow-hidden rounded-3xl border border-white/10 h-[700px] bg-white/[0.03] shadow-2xl shadow-black/50">
-              <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-gray-950/70 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#006d2c]/70 via-transparent to-transparent" />
               <div ref={mapContainer} className="absolute inset-0 w-full h-full z-0" />
 
               {/* Map badges */}
               <div className="absolute left-4 top-4 z-20 flex flex-wrap items-center gap-2">
                 <span className="rounded-full border border-white/10 bg-black/60 backdrop-blur-sm px-3 py-1 text-xs font-semibold text-white">
-                  Layer: <span className="text-emerald-400 ml-1">{layer}</span>
+                  Layer: <span className="text-[#66c2a4] ml-1">{layer}</span>
                 </span>
               </div>
               <div className="absolute bottom-4 right-4 z-20">
@@ -950,7 +950,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
                   animate={{ scale: 1, y: 0 }}
                   exit={{ scale: 0.95, y: 20 }}
                   onClick={(e) => e.stopPropagation()}
-                  className="max-w-3xl w-full bg-gradient-to-b from-gray-900 to-gray-950 border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
+                  className="max-w-3xl w-full bg-gradient-to-b from-[#006d2c] to-[#006d2c] border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
                 >
                   {/* Dialog Header */}
                   <div className="flex items-start justify-between gap-3 border-b border-white/10 p-5">
@@ -1050,7 +1050,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
                         {
                           label: "NDVI",
                           value: field.latestNdvi.toFixed(2),
-                          icon: <Leaf className="h-4 w-4 text-emerald-400" />,
+                          icon: <Leaf className="h-4 w-4 text-[#66c2a4]" />,
                         },
                         {
                           label: "Water stress",
@@ -1060,7 +1060,7 @@ export function DigitalTwinClimate({ fullPage = false }: { fullPage?: boolean })
                         {
                           label: "Flood risk",
                           value: `${(field.floodRiskIdx * 100).toFixed(0)}%`,
-                          icon: <Waves className="h-4 w-4 text-cyan-400" />,
+                          icon: <Waves className="h-4 w-4 text-[#99d8c9]" />,
                         },
                         {
                           label: "Risk score",

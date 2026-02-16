@@ -322,12 +322,12 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
 
   if (!isActivated) {
     return (
-      <div className={`relative w-full overflow-hidden border border-border/50 shadow-2xl bg-gradient-to-br from-violet-950/30 via-slate-950/50 to-indigo-950/30 ${fullPage ? '' : 'rounded-xl'}`} style={{ height: fullPage ? '100vh' : '600px' }}>
+      <div className={`relative w-full overflow-hidden border border-border/50 shadow-2xl bg-gradient-to-br from-[#006d2c]/30 via-[#006d2c]/50 to-[#006d2c]/30 ${fullPage ? '' : 'rounded-xl'}`} style={{ height: fullPage ? '100vh' : '600px' }}>
         {/* Grid background */}
         <div className="absolute inset-0 z-0 overflow-hidden opacity-10">
           <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <pattern id="geogpt-grid" width="5" height="5" patternUnits="userSpaceOnUse">
-              <path d="M 5 0 L 0 0 0 5" fill="none" stroke="currentColor" strokeWidth="0.15" className="text-violet-400" />
+              <path d="M 5 0 L 0 0 0 5" fill="none" stroke="currentColor" strokeWidth="0.15" className="text-[#66c2a4]" />
             </pattern>
             <rect width="100" height="100" fill="url(#geogpt-grid)" />
           </svg>
@@ -336,9 +336,9 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-xl">
             <div className="flex items-center justify-center gap-4 mb-5">
-              <Bot className="w-7 h-7 text-violet-400" />
-              <Sparkles className="w-10 h-10 text-indigo-400" />
-              <MapPin className="w-7 h-7 text-violet-400" />
+              <Bot className="w-7 h-7 text-[#66c2a4]" />
+              <Sparkles className="w-10 h-10 text-[#66c2a4]" />
+              <MapPin className="w-7 h-7 text-[#66c2a4]" />
             </div>
 
             <h3 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-3">
@@ -353,7 +353,7 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
 
             <div className="flex flex-wrap justify-center gap-2 mb-8">
               {["OpenAI GPT-4o", "Turf.js Spatial", "Leaflet Maps", "EUDR Compliance", "GFW Integration", "Bilingual AI"].map(t => (
-                <span key={t} className="text-xs font-mono text-violet-400/80 bg-violet-400/10 px-3 py-1 rounded-full border border-violet-400/20">
+                <span key={t} className="text-xs font-mono text-[#66c2a4]/80 bg-[#66c2a4]/10 px-3 py-1 rounded-full border border-[#66c2a4]/20">
                   {t}
                 </span>
               ))}
@@ -363,7 +363,7 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
               onClick={() => setIsActivated(true)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 bg-violet-500/20 hover:bg-violet-500/30 text-violet-400 font-bold px-6 py-3 rounded-lg border border-violet-500/30 transition-all shadow-lg hover:shadow-violet-500/20"
+              className="inline-flex items-center gap-2 bg-[#2ca25f]/20 hover:bg-[#2ca25f]/30 text-[#66c2a4] font-bold px-6 py-3 rounded-lg border border-[#2ca25f]/30 transition-all shadow-lg hover:shadow-[#2ca25f]/20"
             >
               <Sparkles className="w-5 h-5" />
               Launch GeoGPT Demo
@@ -380,15 +380,15 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/95 to-transparent backdrop-blur-sm border-t border-border/30 p-4">
           <div className="grid grid-cols-4 gap-4 text-center max-w-lg mx-auto">
             <div>
-              <Bot className="w-5 h-5 text-violet-400 mx-auto mb-1" />
+              <Bot className="w-5 h-5 text-[#66c2a4] mx-auto mb-1" />
               <p className="text-[10px] font-mono text-muted-foreground">AI Analyst</p>
             </div>
             <div>
-              <MapPin className="w-5 h-5 text-indigo-400 mx-auto mb-1" />
+              <MapPin className="w-5 h-5 text-[#66c2a4] mx-auto mb-1" />
               <p className="text-[10px] font-mono text-muted-foreground">Spatial Query</p>
             </div>
             <div>
-              <Shield className="w-5 h-5 text-emerald-400 mx-auto mb-1" />
+              <Shield className="w-5 h-5 text-[#66c2a4] mx-auto mb-1" />
               <p className="text-[10px] font-mono text-muted-foreground">EUDR Check</p>
             </div>
             <div>
@@ -408,8 +408,8 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
       {/* Header */}
       <div className={`absolute top-0 left-0 right-0 z-10 bg-background/95 backdrop-blur-md border-b border-border/50 flex items-center justify-between ${fullPage ? 'px-5 py-3' : 'px-4 py-2.5'}`}>
         <div className="flex items-center gap-2.5">
-          <div className={`rounded-lg bg-violet-500/20 border border-violet-500/30 flex items-center justify-center ${fullPage ? 'w-9 h-9' : 'w-7 h-7'}`}>
-            <Sparkles className={`text-violet-400 ${fullPage ? 'w-5 h-5' : 'w-4 h-4'}`} />
+          <div className={`rounded-lg bg-[#2ca25f]/20 border border-[#2ca25f]/30 flex items-center justify-center ${fullPage ? 'w-9 h-9' : 'w-7 h-7'}`}>
+            <Sparkles className={`text-[#66c2a4] ${fullPage ? 'w-5 h-5' : 'w-4 h-4'}`} />
           </div>
           <div>
             <h3 className={`font-display font-bold text-foreground ${fullPage ? 'text-sm' : 'text-xs'}`}>GeoGPT Analyst</h3>
@@ -435,9 +435,9 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
                 onClick={() => setActiveTab(tab)}
                 className={`rounded font-mono font-bold transition-all ${fullPage ? 'px-4 py-1.5 text-xs' : 'px-2.5 py-1 text-[10px]'} ${
                   activeTab === tab
-                    ? "bg-violet-500/20 text-violet-400 border border-violet-500/30"
+                    ? "bg-[#2ca25f]/20 text-[#66c2a4] border border-[#2ca25f]/30"
                     : tab === "map"
-                      ? "text-violet-300/60 hover:text-violet-300 border border-transparent"
+                      ? "text-[#99d8c9]/60 hover:text-[#99d8c9] border border-transparent"
                       : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -453,14 +453,14 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
 
           <button
             onClick={() => { setShowGuide(true); setGuideStep(0); }}
-            className={`rounded border border-border/40 text-muted-foreground hover:text-violet-400 transition-colors ${fullPage ? 'p-2' : 'p-1.5'}`}
+            className={`rounded border border-border/40 text-muted-foreground hover:text-[#66c2a4] transition-colors ${fullPage ? 'p-2' : 'p-1.5'}`}
             title="Show guide"
           >
             <HelpCircle className={fullPage ? 'w-4.5 h-4.5' : 'w-3.5 h-3.5'} />
           </button>
           {fullPage && (
             <Link href="/">
-              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-border/40 text-muted-foreground hover:text-violet-400 hover:border-violet-500/30 transition-colors group">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-border/40 text-muted-foreground hover:text-[#66c2a4] hover:border-[#2ca25f]/30 transition-colors group">
                 <ArrowLeft className="w-4 h-4" />
                 <span className="text-xs font-mono font-bold">Back</span>
               </button>
@@ -485,7 +485,7 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
               <div className="flex-1 overflow-y-auto p-4 space-y-4">
                 {visibleMessages.length === 0 && !isTyping && (
                   <div className="h-full flex flex-col items-center justify-center text-center px-6">
-                    <Bot className={`text-violet-400/30 mb-4 ${fullPage ? 'w-16 h-16' : 'w-12 h-12'}`} />
+                    <Bot className={`text-[#66c2a4]/30 mb-4 ${fullPage ? 'w-16 h-16' : 'w-12 h-12'}`} />
                     <h4 className={`font-display font-bold text-foreground mb-2 ${fullPage ? 'text-lg' : 'text-sm'}`}>
                       {language === "id" ? "Start Asking" : "Start Asking"}
                     </h4>
@@ -504,7 +504,7 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
                           onClick={() => {
                             if (demoIndex < DEMO_CONVERSATIONS.length) playNextPair();
                           }}
-                          className={`w-full text-left px-3 py-2 bg-muted/30 hover:bg-violet-500/10 border border-border/30 hover:border-violet-500/30 rounded-lg text-muted-foreground hover:text-foreground transition-all ${fullPage ? 'text-sm' : 'text-[11px]'}`}
+                          className={`w-full text-left px-3 py-2 bg-muted/30 hover:bg-[#2ca25f]/10 border border-border/30 hover:border-[#2ca25f]/30 rounded-lg text-muted-foreground hover:text-foreground transition-all ${fullPage ? 'text-sm' : 'text-[11px]'}`}
                         >
                           {sq}
                         </button>
@@ -516,17 +516,17 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
                 {visibleMessages.map((msg, i) => (
                   <div key={i} className={`flex ${fullPage ? 'gap-3' : 'gap-2.5'} ${msg.role === "user" ? "justify-end" : ""}`}>
                     {msg.role === "assistant" && (
-                      <div className={`rounded-full bg-violet-500/20 border border-violet-500/30 flex items-center justify-center shrink-0 mt-0.5 ${fullPage ? 'w-9 h-9' : 'w-7 h-7'}`}>
-                        <Bot className={`text-violet-400 ${fullPage ? 'w-5 h-5' : 'w-3.5 h-3.5'}`} />
+                      <div className={`rounded-full bg-[#2ca25f]/20 border border-[#2ca25f]/30 flex items-center justify-center shrink-0 mt-0.5 ${fullPage ? 'w-9 h-9' : 'w-7 h-7'}`}>
+                        <Bot className={`text-[#66c2a4] ${fullPage ? 'w-5 h-5' : 'w-3.5 h-3.5'}`} />
                       </div>
                     )}
                     <div className={`max-w-[85%] rounded-xl leading-relaxed ${fullPage ? 'p-4 text-sm' : 'p-3 text-xs'} ${
                       msg.role === "user"
-                        ? "bg-violet-500/15 border border-violet-500/25 text-foreground"
+                        ? "bg-[#2ca25f]/15 border border-[#2ca25f]/25 text-foreground"
                         : "bg-muted/30 border border-border/30 text-foreground"
                     }`}>
                       {msg.role === "assistant" ? (
-                        <div className={`prose prose-invert max-w-none whitespace-pre-wrap ${fullPage ? 'prose-sm [&_h2]:text-base [&_h2]:font-bold [&_h2]:mb-2 [&_h3]:text-sm [&_h3]:font-bold [&_h3]:mb-1 [&_p]:text-sm [&_p]:mb-2 [&_li]:text-sm [&_table]:text-xs' : 'prose-xs [&_h2]:text-sm [&_h2]:font-bold [&_h2]:mb-2 [&_h3]:text-xs [&_h3]:font-bold [&_h3]:mb-1 [&_p]:text-xs [&_p]:mb-1.5 [&_li]:text-xs [&_table]:text-[10px]'}`}>
+                        <div className={`prose  max-w-none whitespace-pre-wrap ${fullPage ? 'prose-sm [&_h2]:text-base [&_h2]:font-bold [&_h2]:mb-2 [&_h3]:text-sm [&_h3]:font-bold [&_h3]:mb-1 [&_p]:text-sm [&_p]:mb-2 [&_li]:text-sm [&_table]:text-xs' : 'prose-xs [&_h2]:text-sm [&_h2]:font-bold [&_h2]:mb-2 [&_h3]:text-xs [&_h3]:font-bold [&_h3]:mb-1 [&_p]:text-xs [&_p]:mb-1.5 [&_li]:text-xs [&_table]:text-[10px]'}`}>
                           {msg.content}
                         </div>
                       ) : (
@@ -537,7 +537,7 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
                           {Object.entries(msg.stats).map(([k, v]) => (
                             <div key={k} className="bg-background/50 rounded px-2 py-1">
                               <p className={`text-muted-foreground ${fullPage ? 'text-xs' : 'text-[9px]'}`}>{k}</p>
-                              <p className={`font-bold font-mono text-violet-400 ${fullPage ? 'text-sm' : 'text-[11px]'}`}>{v}</p>
+                              <p className={`font-bold font-mono text-[#66c2a4] ${fullPage ? 'text-sm' : 'text-[11px]'}`}>{v}</p>
                             </div>
                           ))}
                         </div>
@@ -545,7 +545,7 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
                       {msg.mapHtml && (
                         <button
                           onClick={() => setActiveTab("map")}
-                          className={`mt-2 flex items-center gap-1.5 font-mono text-violet-400 hover:text-violet-300 transition-colors ${fullPage ? 'text-xs' : 'text-[10px]'}`}
+                          className={`mt-2 flex items-center gap-1.5 font-mono text-[#66c2a4] hover:text-[#99d8c9] transition-colors ${fullPage ? 'text-xs' : 'text-[10px]'}`}
                         >
                           <MapIcon className={fullPage ? 'w-4 h-4' : 'w-3 h-3'} />
                           View on map →
@@ -553,8 +553,8 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
                       )}
                     </div>
                     {msg.role === "user" && (
-                      <div className={`rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center shrink-0 mt-0.5 ${fullPage ? 'w-9 h-9' : 'w-7 h-7'}`}>
-                        <User className={`text-indigo-400 ${fullPage ? 'w-5 h-5' : 'w-3.5 h-3.5'}`} />
+                      <div className={`rounded-full bg-[#2ca25f]/20 border border-[#2ca25f]/30 flex items-center justify-center shrink-0 mt-0.5 ${fullPage ? 'w-9 h-9' : 'w-7 h-7'}`}>
+                        <User className={`text-[#66c2a4] ${fullPage ? 'w-5 h-5' : 'w-3.5 h-3.5'}`} />
                       </div>
                     )}
                   </div>
@@ -563,12 +563,12 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
                 {/* Typing indicator */}
                 {isTyping && (
                   <div className={`flex ${fullPage ? 'gap-3' : 'gap-2.5'}`}>
-                    <div className={`rounded-full bg-violet-500/20 border border-violet-500/30 flex items-center justify-center shrink-0 mt-0.5 ${fullPage ? 'w-9 h-9' : 'w-7 h-7'}`}>
-                      <Bot className={`text-violet-400 ${fullPage ? 'w-5 h-5' : 'w-3.5 h-3.5'}`} />
+                    <div className={`rounded-full bg-[#2ca25f]/20 border border-[#2ca25f]/30 flex items-center justify-center shrink-0 mt-0.5 ${fullPage ? 'w-9 h-9' : 'w-7 h-7'}`}>
+                      <Bot className={`text-[#66c2a4] ${fullPage ? 'w-5 h-5' : 'w-3.5 h-3.5'}`} />
                     </div>
                     <div className={`max-w-[85%] rounded-xl bg-muted/30 border border-border/30 text-foreground leading-relaxed whitespace-pre-wrap ${fullPage ? 'p-4 text-sm' : 'p-3 text-xs'}`}>
                       {typingMessage}
-                      <span className={`inline-block bg-violet-400 ml-0.5 animate-pulse ${fullPage ? 'w-2 h-4' : 'w-1.5 h-3.5'}`} />
+                      <span className={`inline-block bg-[#66c2a4] ml-0.5 animate-pulse ${fullPage ? 'w-2 h-4' : 'w-1.5 h-3.5'}`} />
                     </div>
                   </div>
                 )}
@@ -584,7 +584,7 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
                       if (!isTyping && demoIndex < DEMO_CONVERSATIONS.length) playNextPair();
                     }}
                     disabled={isTyping || demoIndex >= DEMO_CONVERSATIONS.length}
-                    className={`flex-1 text-left bg-muted/30 border border-border/40 rounded-lg text-muted-foreground hover:border-violet-500/40 hover:text-foreground transition-all disabled:opacity-40 ${fullPage ? 'px-4 py-3 text-sm' : 'px-3 py-2.5 text-xs'}`}
+                    className={`flex-1 text-left bg-muted/30 border border-border/40 rounded-lg text-muted-foreground hover:border-[#2ca25f]/40 hover:text-foreground transition-all disabled:opacity-40 ${fullPage ? 'px-4 py-3 text-sm' : 'px-3 py-2.5 text-xs'}`}
                   >
                     {demoIndex >= DEMO_CONVERSATIONS.length
                       ? (language === "id" ? "Demo complete — all queries shown" : "Demo complete — all queries shown")
@@ -597,7 +597,7 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
                       if (!isTyping && demoIndex < DEMO_CONVERSATIONS.length) playNextPair();
                     }}
                     disabled={isTyping || demoIndex >= DEMO_CONVERSATIONS.length}
-                    className={`bg-violet-500/20 border border-violet-500/30 rounded-lg text-violet-400 hover:bg-violet-500/30 transition-colors disabled:opacity-40 ${fullPage ? 'px-4 py-3' : 'px-3 py-2'}`}
+                    className={`bg-[#2ca25f]/20 border border-[#2ca25f]/30 rounded-lg text-[#66c2a4] hover:bg-[#2ca25f]/30 transition-colors disabled:opacity-40 ${fullPage ? 'px-4 py-3' : 'px-3 py-2'}`}
                   >
                     <Send className={fullPage ? 'w-5 h-5' : 'w-4 h-4'} />
                   </button>
@@ -645,7 +645,7 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
               {currentAssistant?.stats ? (
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 mb-4">
-                    <BarChart3 className={`text-violet-400 ${fullPage ? 'w-5 h-5' : 'w-4 h-4'}`} />
+                    <BarChart3 className={`text-[#66c2a4] ${fullPage ? 'w-5 h-5' : 'w-4 h-4'}`} />
                     <span className={`font-bold text-foreground ${fullPage ? 'text-sm' : 'text-xs'}`}>Analysis Statistics</span>
                   </div>
                   <div className={`grid grid-cols-2 ${fullPage ? 'gap-4' : 'gap-3'}`}>
@@ -659,7 +659,7 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
 
                   <div className="mt-4 pt-4 border-t border-border/30">
                     <div className="flex items-center gap-2 mb-2">
-                      <Layers className={`text-violet-400 ${fullPage ? 'w-4.5 h-4.5' : 'w-3.5 h-3.5'}`} />
+                      <Layers className={`text-[#66c2a4] ${fullPage ? 'w-4.5 h-4.5' : 'w-3.5 h-3.5'}`} />
                       <span className={`font-bold text-foreground ${fullPage ? 'text-xs' : 'text-[10px]'}`}>Available Functions (10)</span>
                     </div>
                     <div className={`grid grid-cols-2 ${fullPage ? 'gap-2' : 'gap-1.5'}`}>
@@ -669,8 +669,8 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
                         "get_sentinel2_ndvi", "get_gaul_boundary", "analyze_flood_stats",
                         "analyze_intersection_stats"
                       ].map(fn => (
-                        <div key={fn} className={`flex items-center gap-1.5 rounded bg-violet-500/5 border border-violet-500/10 ${fullPage ? 'px-3 py-1.5' : 'px-2 py-1'}`}>
-                          <div className={`rounded-full bg-violet-400 ${fullPage ? 'w-1.5 h-1.5' : 'w-1 h-1'}`} />
+                        <div key={fn} className={`flex items-center gap-1.5 rounded bg-[#2ca25f]/5 border border-[#2ca25f]/10 ${fullPage ? 'px-3 py-1.5' : 'px-2 py-1'}`}>
+                          <div className={`rounded-full bg-[#66c2a4] ${fullPage ? 'w-1.5 h-1.5' : 'w-1 h-1'}`} />
                           <span className={`font-mono text-muted-foreground ${fullPage ? 'text-xs' : 'text-[9px]'}`}>{fn}</span>
                         </div>
                       ))}
@@ -715,24 +715,24 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
             >
               {GUIDE_STEPS[guideStep].arrow === "left" && (
                 <motion.div animate={{ x: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 1.2 }} className="absolute top-4 -left-8">
-                  <ArrowLeft className="w-5 h-5 text-violet-400" />
+                  <ArrowLeft className="w-5 h-5 text-[#66c2a4]" />
                 </motion.div>
               )}
               {GUIDE_STEPS[guideStep].arrow === "right" && (
                 <motion.div animate={{ x: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.2 }} className="absolute top-4 -right-8">
-                  <ArrowRight className="w-5 h-5 text-violet-400" />
+                  <ArrowRight className="w-5 h-5 text-[#66c2a4]" />
                 </motion.div>
               )}
               {GUIDE_STEPS[guideStep].arrow === "down" && (
                 <motion.div animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.2 }} className="absolute -bottom-8 left-1/2 -translate-x-1/2">
-                  <ArrowDown className="w-5 h-5 text-violet-400" />
+                  <ArrowDown className="w-5 h-5 text-[#66c2a4]" />
                 </motion.div>
               )}
 
-              <div className="bg-background/95 backdrop-blur-md rounded-xl border border-violet-500/30 shadow-2xl shadow-violet-500/10 p-4 max-w-[280px]">
+              <div className="bg-background/95 backdrop-blur-md rounded-xl border border-[#2ca25f]/30 shadow-2xl shadow-[#2ca25f]/10 p-4 max-w-[280px]">
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-violet-500/20 border border-violet-500/40 flex items-center justify-center text-violet-400 text-xs font-bold font-mono">
+                    <div className="w-6 h-6 rounded-full bg-[#2ca25f]/20 border border-[#2ca25f]/40 flex items-center justify-center text-[#66c2a4] text-xs font-bold font-mono">
                       {guideStep + 1}
                     </div>
                     <h4 className="font-display font-bold text-sm text-foreground">{GUIDE_STEPS[guideStep].title}</h4>
@@ -747,7 +747,7 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
                 <div className="flex items-center justify-between">
                   <div className="flex gap-1">
                     {GUIDE_STEPS.map((_, i) => (
-                      <div key={i} className={`w-1.5 h-1.5 rounded-full ${i === guideStep ? "bg-violet-400" : i < guideStep ? "bg-violet-400/40" : "bg-muted-foreground/30"}`} />
+                      <div key={i} className={`w-1.5 h-1.5 rounded-full ${i === guideStep ? "bg-[#66c2a4]" : i < guideStep ? "bg-[#66c2a4]/40" : "bg-muted-foreground/30"}`} />
                     ))}
                   </div>
                   <div className="flex gap-1.5">
@@ -757,11 +757,11 @@ export function GeoGPTShowcase({ fullPage = false }: { fullPage?: boolean }) {
                       </button>
                     )}
                     {guideStep < GUIDE_STEPS.length - 1 ? (
-                      <button onClick={() => setGuideStep(guideStep + 1)} className="text-[10px] font-mono text-violet-400 bg-violet-500/15 hover:bg-violet-500/25 px-3 py-1 rounded border border-violet-500/30 font-bold">
+                      <button onClick={() => setGuideStep(guideStep + 1)} className="text-[10px] font-mono text-[#66c2a4] bg-[#2ca25f]/15 hover:bg-[#2ca25f]/25 px-3 py-1 rounded border border-[#2ca25f]/30 font-bold">
                         Next →
                       </button>
                     ) : (
-                      <button onClick={() => setShowGuide(false)} className="text-[10px] font-mono text-violet-400 bg-violet-500/15 hover:bg-violet-500/25 px-3 py-1 rounded border border-violet-500/30 font-bold">
+                      <button onClick={() => setShowGuide(false)} className="text-[10px] font-mono text-[#66c2a4] bg-[#2ca25f]/15 hover:bg-[#2ca25f]/25 px-3 py-1 rounded border border-[#2ca25f]/30 font-bold">
                         Got it ✓
                       </button>
                     )}

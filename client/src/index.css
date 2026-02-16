@@ -5,33 +5,43 @@
 @tailwind utilities;
 
 :root {
-  /* Earth & Tech Palette */
-  /* Deep Blue (Space/Ocean) */
-  --background: 220 35% 10%;
-  --foreground: 210 40% 98%;
+  /* Green-Teal Nature Palette */
+  /* #edf8fb dominant */
+  --background: 193 64% 96%;
+  --foreground: 144 100% 14%;
 
-  /* Tech Blue */
-  --primary: 210 100% 50%;
-  --primary-foreground: 210 40% 98%;
+  /* Primary — #2ca25f */
+  --primary: 146 57% 40%;
+  --primary-foreground: 0 0% 100%;
 
-  /* Nature Green (Sustainability) */
-  --secondary: 150 60% 35%;
-  --secondary-foreground: 210 40% 98%;
+  /* Secondary — #66c2a4 */
+  --secondary: 160 43% 58%;
+  --secondary-foreground: 144 100% 14%;
 
-  /* Subtle Earth/Grid */
-  --muted: 220 25% 15%;
-  --muted-foreground: 215 20% 65%;
+  /* Muted — #ccece6 */
+  --muted: 169 46% 86%;
+  --muted-foreground: 150 25% 38%;
 
-  /* Accents */
-  --accent: 25 85% 55%; /* Topo map orange */
-  --accent-foreground: 210 40% 98%;
+  /* Accent — #99d8c9 */
+  --accent: 166 45% 72%;
+  --accent-foreground: 144 100% 14%;
 
-  --destructive: 0 62% 30%;
-  --destructive-foreground: 210 40% 98%;
+  /* Card */
+  --card: 193 50% 98%;
+  --card-foreground: 144 100% 14%;
+  --card-border: 169 30% 82%;
 
-  --border: 215 25% 20%;
-  --input: 215 25% 20%;
-  --ring: 210 100% 50%;
+  /* Popover */
+  --popover: 0 0% 100%;
+  --popover-foreground: 144 100% 14%;
+  --popover-border: 169 30% 82%;
+
+  --destructive: 0 62% 50%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 169 30% 80%;
+  --input: 169 30% 80%;
+  --ring: 146 57% 40%;
 
   --radius: 0.75rem;
 
@@ -45,8 +55,8 @@
     @apply bg-background text-foreground antialiased selection:bg-primary/30;
     font-family: var(--font-sans);
     background-image: 
-      linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.95)),
-      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      linear-gradient(rgba(237, 248, 251, 0.92), rgba(237, 248, 251, 0.92)),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232ca25f' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -57,18 +67,18 @@
 
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    text-shadow: 0 0 20px rgba(44, 162, 95, 0.35);
   }
   
   .glass-card {
-    @apply bg-background/60 backdrop-blur-md border border-white/10 shadow-xl;
+    @apply bg-card/80 backdrop-blur-md border border-border/60 shadow-xl;
   }
   
   .grid-bg {
     background-size: 50px 50px;
     background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      linear-gradient(to right, rgba(0, 109, 44, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 109, 44, 0.06) 1px, transparent 1px);
   }
 }
 
@@ -82,9 +92,9 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-muted rounded-full border-2 border-background;
+  @apply bg-secondary/50 rounded-full border-2 border-background;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-muted-foreground;
+  @apply bg-primary/60;
 }

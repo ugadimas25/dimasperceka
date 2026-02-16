@@ -267,12 +267,12 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
 
   if (!isActivated) {
     return (
-      <div className={`relative w-full overflow-hidden border border-border/50 shadow-2xl bg-gradient-to-br from-emerald-950/30 via-slate-950/50 to-blue-950/30 ${fullPage ? '' : 'rounded-xl'}`} style={{ height: fullPage ? '100vh' : '650px' }}>
+      <div className={`relative w-full overflow-hidden border border-border/50 shadow-2xl bg-gradient-to-br from-[#006d2c]/30 via-[#006d2c]/50 to-[#006d2c]/30 ${fullPage ? '' : 'rounded-xl'}`} style={{ height: fullPage ? '100vh' : '650px' }}>
         {/* Subtle grid */}
         <div className="absolute inset-0 z-0 overflow-hidden opacity-10">
           <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <pattern id="map-grid" width="5" height="5" patternUnits="userSpaceOnUse">
-              <path d="M 5 0 L 0 0 0 5" fill="none" stroke="currentColor" strokeWidth="0.15" className="text-emerald-400" />
+              <path d="M 5 0 L 0 0 0 5" fill="none" stroke="currentColor" strokeWidth="0.15" className="text-[#66c2a4]" />
             </pattern>
             <rect width="100" height="100" fill="url(#map-grid)" />
           </svg>
@@ -281,9 +281,9 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-xl">
             <div className="flex items-center justify-center gap-4 mb-5">
-              <Satellite className="w-7 h-7 text-emerald-400" />
+              <Satellite className="w-7 h-7 text-[#66c2a4]" />
               <Globe2 className="w-10 h-10 text-blue-400" />
-              <Layers className="w-7 h-7 text-emerald-400" />
+              <Layers className="w-7 h-7 text-[#66c2a4]" />
             </div>
 
             <h3 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-3">
@@ -297,7 +297,7 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
 
             <div className="flex flex-wrap justify-center gap-2 mb-8">
               {["Google Earth Engine", "Sentinel-1 SAR", "Sentinel-2", "Flood Hazard", "Landslide Detection", "Commodity Analysis"].map(t => (
-                <span key={t} className="text-xs font-mono text-emerald-400/80 bg-emerald-400/10 px-3 py-1 rounded-full border border-emerald-400/20">
+                <span key={t} className="text-xs font-mono text-[#66c2a4]/80 bg-[#66c2a4]/10 px-3 py-1 rounded-full border border-[#66c2a4]/20">
                   {t}
                 </span>
               ))}
@@ -307,7 +307,7 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
               onClick={() => setIsActivated(true)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 font-bold px-6 py-3 rounded-lg border border-emerald-500/30 transition-all shadow-lg hover:shadow-emerald-500/20"
+              className="inline-flex items-center gap-2 bg-[#2ca25f]/20 hover:bg-[#2ca25f]/30 text-[#66c2a4] font-bold px-6 py-3 rounded-lg border border-[#2ca25f]/30 transition-all shadow-lg hover:shadow-[#2ca25f]/20"
             >
               <Satellite className="w-5 h-5" />
               Launch Analysis Dashboard
@@ -334,7 +334,7 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
               <p className="text-[10px] font-mono text-muted-foreground">Landslide</p>
             </div>
             <div>
-              <TreePine className="w-5 h-5 text-emerald-400 mx-auto mb-1" />
+              <TreePine className="w-5 h-5 text-[#66c2a4] mx-auto mb-1" />
               <p className="text-[10px] font-mono text-muted-foreground">Commodity</p>
             </div>
             <div>
@@ -389,12 +389,12 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
       <div className={`absolute left-3 right-3 z-10 flex items-start justify-between gap-2 ${fullPage ? 'top-4' : 'top-3'}`}>
         <div className={`bg-background/90 backdrop-blur-md rounded-lg border border-border/50 shadow-lg flex items-center gap-3 min-w-0 ${fullPage ? 'px-4 py-2.5' : 'px-3 py-2'}`}>
           <div className="flex items-center gap-2 min-w-0">
-            <Satellite className={`text-emerald-400 shrink-0 ${fullPage ? 'w-5 h-5' : 'w-4 h-4'}`} />
+            <Satellite className={`text-[#66c2a4] shrink-0 ${fullPage ? 'w-5 h-5' : 'w-4 h-4'}`} />
             <div className="min-w-0">
               <h3 className={`font-display font-bold text-foreground truncate ${fullPage ? 'text-sm' : 'text-xs'}`}>GEE Flood & Disaster Analysis</h3>
               <div className="flex items-center gap-1.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                <span className={`text-emerald-400/80 font-mono truncate ${fullPage ? 'text-xs' : 'text-[9px]'}`}>Sentinel-1 SAR · Google Earth Engine</span>
+                <div className="w-1.5 h-1.5 rounded-full bg-[#66c2a4] animate-pulse shrink-0" />
+                <span className={`text-[#66c2a4]/80 font-mono truncate ${fullPage ? 'text-xs' : 'text-[9px]'}`}>Sentinel-1 SAR · Google Earth Engine</span>
               </div>
             </div>
           </div>
@@ -402,7 +402,7 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
           <div className={`w-px bg-border/50 shrink-0 ${fullPage ? 'h-7' : 'h-6'}`} />
 
           <div className="flex items-center gap-1.5 shrink-0">
-            <MapPin className={`text-emerald-400 ${fullPage ? 'w-4 h-4' : 'w-3.5 h-3.5'}`} />
+            <MapPin className={`text-[#66c2a4] ${fullPage ? 'w-4 h-4' : 'w-3.5 h-3.5'}`} />
             <select
               value={selectedLocation}
               onChange={e => setSelectedLocation(e.target.value as LocationKey)}
@@ -421,10 +421,10 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
         <div className={`flex items-center shrink-0 ${fullPage ? 'gap-2' : 'gap-1.5'}`}>
           <button
             onClick={() => { setShowGuide(true); setGuideStep(0); }}
-            className={`bg-background/90 backdrop-blur-md rounded-lg border border-border/50 shadow-lg hover:border-emerald-500/50 transition-colors ${fullPage ? 'p-2.5' : 'p-2'}`}
+            className={`bg-background/90 backdrop-blur-md rounded-lg border border-border/50 shadow-lg hover:border-[#2ca25f]/50 transition-colors ${fullPage ? 'p-2.5' : 'p-2'}`}
             title="Show guide"
           >
-            <HelpCircle className={`text-emerald-400 ${fullPage ? 'w-5 h-5' : 'w-4 h-4'}`} />
+            <HelpCircle className={`text-[#66c2a4] ${fullPage ? 'w-5 h-5' : 'w-4 h-4'}`} />
           </button>
           <div className={`bg-background/90 backdrop-blur-md rounded-lg border border-border/50 shadow-lg flex gap-1 ${fullPage ? 'px-2.5 py-2' : 'px-2 py-1.5'}`}>
           {(Object.entries(BASEMAPS) as [BasemapKey, typeof BASEMAPS[BasemapKey]][]).map(([key, bm]) => (
@@ -433,7 +433,7 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
               onClick={() => setBasemap(key)}
               className={`rounded font-mono font-bold transition-all ${fullPage ? 'px-3 py-1.5 text-xs' : 'px-2 py-1 text-[10px]'} ${
                 basemap === key
-                  ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                  ? "bg-[#2ca25f]/20 text-[#66c2a4] border border-[#2ca25f]/30"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -443,9 +443,9 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
           </div>
           {fullPage && (
             <Link href="/">
-              <button className={`bg-background/90 backdrop-blur-md rounded-lg border border-border/50 shadow-lg flex items-center gap-1.5 hover:border-emerald-500/50 transition-colors group ${fullPage ? 'px-3 py-2' : 'px-2.5 py-1.5'}`}>
-                <ArrowLeft className={`text-muted-foreground group-hover:text-emerald-400 transition-colors ${fullPage ? 'w-4 h-4' : 'w-3.5 h-3.5'}`} />
-                <span className={`font-mono font-bold text-muted-foreground group-hover:text-emerald-400 transition-colors ${fullPage ? 'text-xs' : 'text-[10px]'}`}>Back</span>
+              <button className={`bg-background/90 backdrop-blur-md rounded-lg border border-border/50 shadow-lg flex items-center gap-1.5 hover:border-[#2ca25f]/50 transition-colors group ${fullPage ? 'px-3 py-2' : 'px-2.5 py-1.5'}`}>
+                <ArrowLeft className={`text-muted-foreground group-hover:text-[#66c2a4] transition-colors ${fullPage ? 'w-4 h-4' : 'w-3.5 h-3.5'}`} />
+                <span className={`font-mono font-bold text-muted-foreground group-hover:text-[#66c2a4] transition-colors ${fullPage ? 'text-xs' : 'text-[10px]'}`}>Back</span>
               </button>
             </Link>
           )}
@@ -456,10 +456,10 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
       <div className={`absolute left-3 z-10 ${fullPage ? 'top-[60px] w-[260px]' : 'top-[52px] w-[220px]'}`}>
         <button
           onClick={() => setShowLayerPanel(!showLayerPanel)}
-          className={`w-full bg-background/90 backdrop-blur-md rounded-lg border border-border/50 shadow-lg hover:border-emerald-500/40 transition-colors flex items-center justify-between ${fullPage ? 'px-4 py-2.5' : 'px-3 py-2'}`}
+          className={`w-full bg-background/90 backdrop-blur-md rounded-lg border border-border/50 shadow-lg hover:border-[#2ca25f]/40 transition-colors flex items-center justify-between ${fullPage ? 'px-4 py-2.5' : 'px-3 py-2'}`}
         >
           <div className="flex items-center gap-2">
-            <Layers className={`text-emerald-400 ${fullPage ? 'w-5 h-5' : 'w-4 h-4'}`} />
+            <Layers className={`text-[#66c2a4] ${fullPage ? 'w-5 h-5' : 'w-4 h-4'}`} />
             <span className={`font-mono font-bold text-foreground ${fullPage ? 'text-sm' : 'text-xs'}`}>Analysis Layers</span>
           </div>
           <ChevronDown className={`text-muted-foreground transition-transform ${fullPage ? 'w-4 h-4' : 'w-3.5 h-3.5'} ${showLayerPanel ? "rotate-180" : ""}`} />
@@ -540,7 +540,7 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
                 <LayerToggle
                   icon={<TreePine className="w-4 h-4" />}
                   label="Commodity"
-                  color="text-emerald-400"
+                  color="text-[#66c2a4]"
                   visible={layers.commodity.visible}
                   opacity={layers.commodity.opacity}
                   onToggle={() => setLayers(prev => ({ ...prev, commodity: { ...prev.commodity, visible: !prev.commodity.visible } }))}
@@ -553,7 +553,7 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
                         onClick={() => setLayers(prev => ({ ...prev, commodity: { ...prev.commodity, dataset: key } }))}
                         className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono transition-all border ${
                           layers.commodity.dataset === key
-                            ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-400"
+                            ? "border-[#2ca25f]/40 bg-[#2ca25f]/10 text-[#66c2a4]"
                             : "border-border/30 text-muted-foreground hover:text-foreground"
                         }`}
                       >
@@ -626,11 +626,11 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
             <div className="bg-background/90 backdrop-blur-md rounded-lg border border-border/50 px-4 py-3 shadow-lg">
               <div className="flex items-center justify-between mb-2">
                 <div className={`flex items-center gap-2`}>
-                  <BarChart3 className={`text-emerald-400 ${fullPage ? 'w-5 h-5' : 'w-4 h-4'}`} />
+                  <BarChart3 className={`text-[#66c2a4] ${fullPage ? 'w-5 h-5' : 'w-4 h-4'}`} />
                   <span className={`font-bold text-foreground ${fullPage ? 'text-sm' : 'text-xs'}`}>Area Statistics</span>
                   <span className={`text-muted-foreground font-mono ${fullPage ? 'text-xs' : 'text-[9px]'}`}>({location.district})</span>
                 </div>
-                {loadingStats && <Loader2 className="w-3.5 h-3.5 text-emerald-400 animate-spin" />}
+                {loadingStats && <Loader2 className="w-3.5 h-3.5 text-[#66c2a4] animate-spin" />}
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -653,8 +653,8 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
                 <StatCard
                   label={`${COMMODITY_LAYERS[layers.commodity.dataset].label}`}
                   value={stats.commodity}
-                  color="text-emerald-400"
-                  bgColor="bg-emerald-500/10"
+                  color="text-[#66c2a4]"
+                  bgColor="bg-[#2ca25f]/10"
                   icon={<TreePine className="w-3.5 h-3.5" />}
                   visible={layers.commodity.visible}
                 />
@@ -675,17 +675,17 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
       {/* Toggle stats visibility */}
       <button
         onClick={() => setShowStats(!showStats)}
-        className="absolute bottom-3 right-3 z-20 bg-background/90 backdrop-blur-md rounded-lg border border-border/50 p-2 shadow-lg hover:border-emerald-500/50 transition-colors"
+        className="absolute bottom-3 right-3 z-20 bg-background/90 backdrop-blur-md rounded-lg border border-border/50 p-2 shadow-lg hover:border-[#2ca25f]/50 transition-colors"
         title={showStats ? "Hide stats" : "Show stats"}
       >
-        <BarChart3 className={`w-4 h-4 ${showStats ? "text-emerald-400" : "text-muted-foreground"}`} />
+        <BarChart3 className={`w-4 h-4 ${showStats ? "text-[#66c2a4]" : "text-muted-foreground"}`} />
       </button>
 
       {/* Loading overlay */}
       {!mapLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-background/80 z-20">
           <div className="flex flex-col items-center gap-3">
-            <Loader2 className="w-8 h-8 text-emerald-400 animate-spin" />
+            <Loader2 className="w-8 h-8 text-[#66c2a4] animate-spin" />
             <span className="text-sm font-mono text-muted-foreground">Connecting to Google Earth Engine...</span>
           </div>
         </div>
@@ -724,7 +724,7 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
                   transition={{ repeat: Infinity, duration: 1.2 }}
                   className="absolute -top-8 left-8"
                 >
-                  <ArrowDown className="w-5 h-5 text-emerald-400 rotate-[225deg]" />
+                  <ArrowDown className="w-5 h-5 text-[#66c2a4] rotate-[225deg]" />
                 </motion.div>
               )}
               {GUIDE_STEPS[guideStep].arrow === "left" && (
@@ -733,7 +733,7 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
                   transition={{ repeat: Infinity, duration: 1.2 }}
                   className="absolute top-4 -left-8"
                 >
-                  <ArrowLeft className="w-5 h-5 text-emerald-400" />
+                  <ArrowLeft className="w-5 h-5 text-[#66c2a4]" />
                 </motion.div>
               )}
               {GUIDE_STEPS[guideStep].arrow === "right" && (
@@ -742,7 +742,7 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
                   transition={{ repeat: Infinity, duration: 1.2 }}
                   className="absolute top-4 -right-8"
                 >
-                  <ArrowRight className="w-5 h-5 text-emerald-400" />
+                  <ArrowRight className="w-5 h-5 text-[#66c2a4]" />
                 </motion.div>
               )}
               {GUIDE_STEPS[guideStep].arrow === "down" && GUIDE_STEPS[guideStep].position === "bottom" && (
@@ -751,14 +751,14 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
                   transition={{ repeat: Infinity, duration: 1.2 }}
                   className="absolute -bottom-8 left-1/2 -translate-x-1/2"
                 >
-                  <ArrowDown className="w-5 h-5 text-emerald-400" />
+                  <ArrowDown className="w-5 h-5 text-[#66c2a4]" />
                 </motion.div>
               )}
 
-              <div className="bg-background/95 backdrop-blur-md rounded-xl border border-emerald-500/30 shadow-2xl shadow-emerald-500/10 p-4 max-w-[280px]">
+              <div className="bg-background/95 backdrop-blur-md rounded-xl border border-[#2ca25f]/30 shadow-2xl shadow-[#2ca25f]/10 p-4 max-w-[280px]">
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xs font-bold font-mono">
+                    <div className="w-6 h-6 rounded-full bg-[#2ca25f]/20 border border-[#2ca25f]/40 flex items-center justify-center text-[#66c2a4] text-xs font-bold font-mono">
                       {guideStep + 1}
                     </div>
                     <h4 className="font-display font-bold text-sm text-foreground">{GUIDE_STEPS[guideStep].title}</h4>
@@ -776,7 +776,7 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
                       <div
                         key={i}
                         className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                          i === guideStep ? "bg-emerald-400" : i < guideStep ? "bg-emerald-400/40" : "bg-muted-foreground/30"
+                          i === guideStep ? "bg-[#66c2a4]" : i < guideStep ? "bg-[#66c2a4]/40" : "bg-muted-foreground/30"
                         }`}
                       />
                     ))}
@@ -793,14 +793,14 @@ export function FloodMap3D({ fullPage = false }: { fullPage?: boolean }) {
                     {guideStep < GUIDE_STEPS.length - 1 ? (
                       <button
                         onClick={() => setGuideStep(guideStep + 1)}
-                        className="text-[10px] font-mono text-emerald-400 bg-emerald-500/15 hover:bg-emerald-500/25 px-3 py-1 rounded border border-emerald-500/30 transition-colors font-bold"
+                        className="text-[10px] font-mono text-[#66c2a4] bg-[#2ca25f]/15 hover:bg-[#2ca25f]/25 px-3 py-1 rounded border border-[#2ca25f]/30 transition-colors font-bold"
                       >
                         Next →
                       </button>
                     ) : (
                       <button
                         onClick={() => setShowGuide(false)}
-                        className="text-[10px] font-mono text-emerald-400 bg-emerald-500/15 hover:bg-emerald-500/25 px-3 py-1 rounded border border-emerald-500/30 transition-colors font-bold"
+                        className="text-[10px] font-mono text-[#66c2a4] bg-[#2ca25f]/15 hover:bg-[#2ca25f]/25 px-3 py-1 rounded border border-[#2ca25f]/30 transition-colors font-bold"
                       >
                         Got it ✓
                       </button>
@@ -842,7 +842,7 @@ function LayerToggle({
       <div className="flex items-center justify-between">
         <button onClick={onToggle} className="flex items-center gap-2 flex-1 text-left">
           <div className={`w-5 h-5 rounded flex items-center justify-center transition-colors ${
-            visible ? "bg-emerald-500/20 " + color : "bg-muted/30 text-muted-foreground"
+            visible ? "bg-[#2ca25f]/20 " + color : "bg-muted/30 text-muted-foreground"
           }`}>
             {visible
               ? <Eye className="w-3 h-3" />
@@ -862,7 +862,7 @@ function LayerToggle({
               type="range" min="0.1" max="1" step="0.05"
               value={opacity}
               onChange={e => onOpacity(parseFloat(e.target.value))}
-              className="flex-1 h-1 bg-muted rounded-full appearance-none cursor-pointer accent-emerald-500"
+              className="flex-1 h-1 bg-muted rounded-full appearance-none cursor-pointer accent-[#2ca25f]"
             />
             <span className="text-[9px] font-mono text-muted-foreground w-6 text-right">{Math.round(opacity * 100)}%</span>
           </div>

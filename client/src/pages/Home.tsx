@@ -77,7 +77,7 @@ function WorkCard({
       className="mb-6"
     >
       <RouterLink href={href}>
-        <div className="w-full text-left group transition-all rounded-xl border overflow-hidden bg-card/30 border-white/5 hover:border-primary/30 hover:bg-card/50 cursor-pointer">
+        <div className="w-full text-left group transition-all rounded-xl border overflow-hidden bg-card/60 border-border/50 hover:border-primary/30 hover:bg-card/80 cursor-pointer">
           <div className="p-5 md:p-6">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1 min-w-0">
@@ -147,8 +147,8 @@ function ExpandableWork({
         onClick={() => setExpanded(!expanded)}
         className={`w-full text-left group transition-all rounded-xl border overflow-hidden ${
           expanded
-            ? "bg-card/60 border-primary/30 shadow-lg shadow-primary/5"
-            : "bg-card/30 border-white/5 hover:border-primary/20 hover:bg-card/50"
+            ? "bg-card/80 border-primary/30 shadow-lg shadow-primary/5"
+            : "bg-card/60 border-border/50 hover:border-primary/20 hover:bg-card/80"
         }`}
       >
         <div className="p-5 md:p-6">
@@ -198,7 +198,7 @@ function ExpandableWork({
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="px-5 md:px-6 pb-6 pt-2 bg-card/40 border-x border-b border-primary/20 rounded-b-xl">
+            <div className="px-5 md:px-6 pb-6 pt-2 bg-card/70 border-x border-b border-primary/20 rounded-b-xl">
               {children}
             </div>
           </motion.div>
@@ -270,7 +270,7 @@ export default function Home() {
               HELLO, WORLD
             </span>
             <h1 className="font-display font-bold text-5xl md:text-7xl lg:text-8xl mb-6 tracking-tight leading-none">
-              Dimas <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-400 to-secondary">Perceka</span>
+              Dimas <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">Perceka</span>
             </h1>
             <h2 className="font-sans text-xl md:text-3xl text-muted-foreground mb-8 max-w-2xl leading-relaxed">
               GIS Specialist & Remote Sensing Expert bridging the gap between <span className="text-secondary font-medium">Data</span>, <span className="text-primary font-medium">Technology</span>, and <span className="text-accent font-medium">Sustainability</span>.
@@ -311,14 +311,14 @@ export default function Home() {
           />
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="prose prose-lg prose-invert text-muted-foreground">
+            <div className="prose prose-lg text-muted-foreground">
               <p>
                 As a <strong className="text-primary">Technical Lead</strong> with over 8 years of experience, I architect and deliver enterprise-level geospatial solutions that drive environmental impact. I lead cross-functional teams in building scalable systems for remote sensing, spatial data infrastructure, and climate analytics.
               </p>
               <p>
                 Currently serving as <strong className="text-primary">Geospatial Lead</strong>, I bridge the gap between technical execution and strategic vision—translating complex requirements into robust architectures, guiding engineering best practices, and mentoring teams to deliver production-ready solutions for sustainable agriculture, forestry, and carbon monitoring.
               </p>
-              <ul className="grid grid-cols-2 gap-4 mt-8 font-mono text-sm text-foreground not-prose">
+              <ul className="grid grid-cols-2 gap-4 mt-8 font-mono text-sm text-foreground/80 not-prose">
                 <li className="flex items-center gap-2"><Users className="text-primary w-4 h-4"/> Team Leadership</li>
                 <li className="flex items-center gap-2"><Code2 className="text-primary w-4 h-4"/> Technical Architecture</li>
                 <li className="flex items-center gap-2"><MapIcon className="text-primary w-4 h-4"/> Geospatial Systems</li>
@@ -327,7 +327,7 @@ export default function Home() {
             </div>
             
             <div className="relative group">
-              <div className="absolute -inset-4 border-2 border-primary/20 rounded-2xl z-0 group-hover:border-primary/50 transition-colors" />
+              <div className="absolute -inset-4 border-2 border-primary/30 rounded-2xl z-0 group-hover:border-primary/50 transition-colors" />
               <div className="relative z-10 bg-card rounded-xl overflow-hidden aspect-square max-w-sm mx-auto shadow-2xl">
                  {/* Profile Photo */}
                  <img 
@@ -337,7 +337,7 @@ export default function Home() {
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent flex items-end p-6">
                     <div>
-                      <h3 className="font-display font-bold text-xl text-white">Dimas Perceka</h3>
+                      <h3 className="font-display font-bold text-xl text-foreground">Dimas Perceka</h3>
                       <p className="text-primary font-mono text-sm">Indonesia based</p>
                     </div>
                  </div>
@@ -368,7 +368,7 @@ export default function Home() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.08 }}
-                    className="w-[320px] shrink-0 bg-card/40 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-primary/30 transition-all group"
+                    className="w-[320px] shrink-0 bg-card/70 backdrop-blur-md border border-border/50 rounded-xl p-5 hover:border-primary/30 transition-all group"
                   >
                     <div className="flex items-center gap-2 text-secondary font-medium text-sm mb-1">
                       <Building2 className="w-3.5 h-3.5" />
@@ -546,7 +546,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="bg-card/40 backdrop-blur-md border border-white/5 rounded-xl p-6 hover:border-primary/30 transition-all group cursor-pointer"
+                className="bg-card/70 backdrop-blur-md border border-border/50 rounded-xl p-6 hover:border-primary/30 transition-all group cursor-pointer"
                 onClick={() => article.url && window.open(article.url, '_blank')}
               >
                 <div className="flex items-center justify-between mb-4">
@@ -583,7 +583,7 @@ export default function Home() {
       </section>
 
       {/* === CONTACT SECTION === */}
-      <section id="contact" className="py-24 md:py-32 bg-gradient-to-b from-background to-black relative">
+      <section id="contact" className="py-24 md:py-32 bg-gradient-to-b from-background to-muted relative">
         <div className="container px-4 mx-auto max-w-4xl text-center">
           <span className="font-mono text-primary mb-4 block">05. What's Next?</span>
           <h2 className="font-display text-4xl md:text-6xl font-bold text-foreground mb-6">
@@ -658,7 +658,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 text-center text-muted-foreground font-mono text-sm border-t border-white/5">
+      <footer className="py-8 text-center text-muted-foreground font-mono text-sm border-t border-border/50">
         <p>Designed & Built by Dimas Perceka</p>
         <p className="opacity-50 mt-2">© {new Date().getFullYear()} All rights reserved.</p>
       </footer>
